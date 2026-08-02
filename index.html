@@ -100,15 +100,48 @@
 </head>
 <body>
 
-<div class="hero">
-  <h1>FINdossier.nl</h1>
-  <p style="font-style:italic;font-size:19px;margin-top:10px;opacity:.95">Je financiën op orde. Je doelen in beeld. Je koers helder.</p>
-  <p class="tagline">FINdossier is je persoonlijke financiële dossier dat je één keer opbouwt en daarna jaarlijks bijwerkt — zelf, of samen met je adviseur. Zo weet jij altijd hoe je ervoor staat, en weten je nabestaanden waar alles te vinden is als jou iets overkomt.</p>
-  <div class="cta-rij">
-    <a class="btn btn-start" href="tool.html">Start de tool</a>
-    <a class="btn btn-wit" href="handleiding.html">Bekijk de handleiding</a>
+<div class="hero" style="text-align:left">
+  <div style="max-width:1020px;margin:0 auto;display:flex;gap:44px;align-items:center;flex-wrap:wrap">
+    <div style="flex:1.15;min-width:300px">
+      <h1>FINdossier.nl</h1>
+      <p style="font-style:italic;font-size:20px;margin-top:12px;opacity:.95">Je financiën op orde. Je doelen in beeld. Je koers helder.</p>
+      <p class="tagline" style="margin:16px 0 0">FINdossier is je persoonlijke financiële dossier dat je één keer opbouwt en daarna jaarlijks bijwerkt — zelf, of samen met je financieel adviseur. Zo weet jij altijd hoe je ervoor staat, en weten je nabestaanden waar alles te vinden is als jou iets overkomt.</p>
+      <div class="cta-rij" style="justify-content:flex-start">
+        <a class="btn btn-start" href="tool.html">Start de tool — gratis</a>
+        <a class="btn btn-wit" href="handleiding.html">Bekijk de handleiding</a>
+      </div>
+      <p class="gratis">Gratis · geen account nodig · alles blijft op je eigen computer</p>
+    </div>
+    <div style="flex:1;min-width:300px">
+      <svg viewBox="0 0 440 320" style="width:100%;height:auto;filter:drop-shadow(0 10px 30px rgba(0,0,0,.28))" role="img" aria-label="Voorbeeldweergave van het FINdossier-overzicht">
+        <rect x="10" y="10" width="420" height="300" rx="14" fill="#fff"/>
+        <rect x="10" y="10" width="420" height="40" rx="14" fill="#E8F1F8"/>
+        <circle cx="34" cy="30" r="6" fill="#F39200"/><rect x="50" y="24" width="120" height="12" rx="6" fill="#005C9E" opacity=".8"/>
+        <text x="30" y="76" font-family="Segoe UI,Arial" font-size="11" font-weight="700" fill="#00426F">VERDELING BEZITTINGEN</text>
+        <circle cx="85" cy="150" r="44" fill="none" stroke="#005C9E" stroke-width="22" stroke-dasharray="130 147" transform="rotate(-90 85 150)"/>
+        <circle cx="85" cy="150" r="44" fill="none" stroke="#F39200" stroke-width="22" stroke-dasharray="80 197" stroke-dashoffset="-130" transform="rotate(-90 85 150)"/>
+        <circle cx="85" cy="150" r="44" fill="none" stroke="#2E9E5B" stroke-width="22" stroke-dasharray="67 210" stroke-dashoffset="-210" transform="rotate(-90 85 150)"/>
+        <text x="85" y="148" text-anchor="middle" font-family="Segoe UI,Arial" font-size="9" fill="#5C6B76">Totaal</text>
+        <text x="85" y="160" text-anchor="middle" font-family="Segoe UI,Arial" font-size="11" font-weight="700" fill="#1E2A33">€ 812k</text>
+        <rect x="150" y="112" width="9" height="9" rx="2" fill="#005C9E"/><rect x="164" y="114" width="66" height="6" rx="3" fill="#D9E0E6"/>
+        <rect x="150" y="132" width="9" height="9" rx="2" fill="#F39200"/><rect x="164" y="134" width="52" height="6" rx="3" fill="#D9E0E6"/>
+        <rect x="150" y="152" width="9" height="9" rx="2" fill="#2E9E5B"/><rect x="164" y="154" width="58" height="6" rx="3" fill="#D9E0E6"/>
+        <text x="252" y="76" font-family="Segoe UI,Arial" font-size="11" font-weight="700" fill="#00426F">OP KOERS NAAR JE DOELEN</text>
+        <polyline points="252,190 285,178 318,168 351,150 384,136 412,118" fill="none" stroke="#005C9E" stroke-width="3"/>
+        <polyline points="318,168 351,144 384,124 412,100" fill="none" stroke="#5DA3D5" stroke-width="2.5" stroke-dasharray="6 5"/>
+        <circle cx="318" cy="168" r="4" fill="#005C9E"/>
+        <path d="M384,124 l7,-7 l7,7 l-7,7 Z" fill="#F39200"/>
+        <text x="384" y="106" text-anchor="middle" font-family="Segoe UI,Arial" font-size="8.5" fill="#5C6B76">eerder stoppen</text>
+        <line x1="252" y1="200" x2="412" y2="200" stroke="#D9E0E6"/>
+        <rect x="30" y="222" width="380" height="1" fill="#EDF1F4"/>
+        <text x="30" y="248" font-family="Segoe UI,Arial" font-size="11" font-weight="700" fill="#00426F">CASHFLOW</text>
+        <rect x="30" y="262" width="240" height="12" rx="6" fill="#2E9E5B" opacity=".85"/>
+        <rect x="30" y="282" width="176" height="12" rx="6" fill="#C0392B" opacity=".75"/>
+        <text x="278" y="272" font-family="Segoe UI,Arial" font-size="9" fill="#5C6B76">inkomen</text>
+        <text x="214" y="292" font-family="Segoe UI,Arial" font-size="9" fill="#5C6B76">uitgaven</text>
+      </svg>
+    </div>
   </div>
-  <p class="gratis">Gratis te gebruiken · geen account nodig · alles blijft op je eigen computer</p>
 </div>
 
 <div class="wrap">
@@ -120,14 +153,17 @@
       <p>Daarom bouwden we FINdossier: één persoonlijk dossier waarin je niet alleen vastlegt wat je <strong>hebt</strong>, maar ook wat je <strong>wilt</strong>.</p>
       <div class="twee-gezichten" style="grid-template-columns:1fr 1fr 1fr">
         <div class="gezicht">
+          <svg viewBox="0 0 40 40" style="width:38px;height:38px;margin-bottom:8px"><rect x="6" y="10" width="28" height="22" rx="3" fill="none" stroke="#005C9E" stroke-width="2.5"/><path d="M6 16 h28" stroke="#005C9E" stroke-width="2.5"/><path d="M12 22 h10 M12 27 h16" stroke="#F39200" stroke-width="2.5" stroke-linecap="round"/></svg>
           <h3>Wat je hebt</h3>
           <p>Je hypotheek, verzekeringen, pensioen, vermogen, inkomen en abonnementen. Compleet en actueel, zodat je in één oogopslag ziet hoe je ervoor staat.</p>
         </div>
         <div class="gezicht">
+          <svg viewBox="0 0 40 40" style="width:38px;height:38px;margin-bottom:8px"><circle cx="20" cy="20" r="13" fill="none" stroke="#005C9E" stroke-width="2.5"/><circle cx="20" cy="20" r="7" fill="none" stroke="#F39200" stroke-width="2.5"/><circle cx="20" cy="20" r="2.5" fill="#005C9E"/></svg>
           <h3>Wat je wilt</h3>
           <p>Je doelen en wensen: eerder stoppen met werken, de kinderen op weg helpen, verbouwen, een buffer die rust geeft. Maar ook je wensen voor als jou iets overkomt — zodat je nabestaanden niet hoeven te zoeken en te gissen op het moeilijkste moment.</p>
         </div>
         <div class="gezicht" style="background:#FDF3E7">
+          <svg viewBox="0 0 40 40" style="width:38px;height:38px;margin-bottom:8px"><circle cx="20" cy="20" r="14" fill="none" stroke="#B26D00" stroke-width="2.5"/><path d="M26 14 L22 22 L14 26 L18 18 Z" fill="#F39200"/></svg>
           <h3>Waar je staat op de route</h3>
           <p>En dat is het kompas: door wat je hebt naast wat je wilt te leggen, laat FINdossier zien of je op koers ligt — en waar je moet bijsturen. Geen losse administratie, maar richting.</p>
         </div>
@@ -135,6 +171,40 @@
       <p style="margin-top:16px">Eén keer opbouwen, daarna elk jaar een uurtje bijwerken. <strong>Zelf</strong>, met het dossier als gids die je stap voor stap door alle onderdelen leidt. Of <strong>samen met je adviseur</strong>, die van je jaarlijkse update een onderhoudsgesprek maakt: klopt alles nog, past alles nog bij je doelen, en wat verandert er komend jaar?</p>
       <p>Zo is FINdossier drie dingen tegelijk: je financiële APK, je kompas naar je doelen, en het overzicht dat je dierbaren houvast geeft als het nodig is.</p>
       <p style="font-style:italic;color:var(--hb-blauw-d);font-weight:600">FINdossier. Weten waar je staat, weten waar je heen gaat.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="intro-blok">
+      <h2>Wat het je brengt</h2>
+      <div class="tab-grid" style="margin-top:12px">
+        <div class="tab-item" style="background:#fff;border:1px solid var(--grijs-lijn)">
+          <svg viewBox="0 0 40 40" style="width:34px;height:34px"><circle cx="20" cy="20" r="12" fill="none" stroke="#005C9E" stroke-width="8" stroke-dasharray="45 31" transform="rotate(-90 20 20)"/><circle cx="20" cy="20" r="12" fill="none" stroke="#F39200" stroke-width="8" stroke-dasharray="31 45" stroke-dashoffset="-45" transform="rotate(-90 20 20)"/></svg>
+          <h3>Overzicht in één oogopslag</h3><p>Cirkeldiagrammen en grafieken laten direct zien waar je vermogen zit en hoe het zich per jaar ontwikkelt.</p>
+        </div>
+        <div class="tab-item" style="background:#fff;border:1px solid var(--grijs-lijn)">
+          <svg viewBox="0 0 40 40" style="width:34px;height:34px"><polyline points="4,32 14,24 22,27 36,10" fill="none" stroke="#2E9E5B" stroke-width="3"/><path d="M30,10 h6 v6" fill="none" stroke="#2E9E5B" stroke-width="3"/></svg>
+          <h3>Zicht op je doelen</h3><p>Het Kompas legt je doelen naast je cijfers: past eerder stoppen, de verbouwing of de studiepot binnen je eigen projectie?</p>
+        </div>
+        <div class="tab-item" style="background:#fff;border:1px solid var(--grijs-lijn)">
+          <svg viewBox="0 0 40 40" style="width:34px;height:34px"><rect x="8" y="4" width="24" height="14" rx="3" fill="none" stroke="#005C9E" stroke-width="2.5"/><rect x="3" y="24" width="14" height="12" rx="3" fill="none" stroke="#F39200" stroke-width="2.5"/><rect x="23" y="24" width="14" height="12" rx="3" fill="none" stroke="#F39200" stroke-width="2.5"/><path d="M20 18 v3 M10 24 v-3 h20 v3" fill="none" stroke="#D9A85C" stroke-width="2"/></svg>
+          <h3>Een familieboom die klopt</h3><p>Relatievorm, kinderen, kleinkinderen en schenkingen in één schema — met echte lijnen tussen ouders en kinderen.</p>
+        </div>
+        <div class="tab-item" style="background:#fff;border:1px solid var(--grijs-lijn)">
+          <svg viewBox="0 0 40 40" style="width:34px;height:34px"><rect x="9" y="17" width="22" height="17" rx="3" fill="none" stroke="#005C9E" stroke-width="2.5"/><path d="M14 17 v-4 a6 6 0 0 1 12 0 v4" fill="none" stroke="#005C9E" stroke-width="2.5"/><circle cx="20" cy="26" r="2.5" fill="#F39200"/></svg>
+          <h3>Rust voor je dierbaren</h3><p>Het nalatenschapsdossier vertelt je nabestaanden wie ze moeten bellen en waar alles ligt — op het moment dat het nodig is.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="intro-blok" style="border-left:5px solid var(--hb-oranje)">
+      <h2>Gratis. En waarom eigenlijk?</h2>
+      <p>FINdossier is gratis omdat het gratis kán zijn: er is geen server, geen database en geen account — de tool draait volledig in je eigen browser en je bewaart je dossier zelf. Er zijn dus geen kosten die we aan jou zouden moeten doorberekenen, en je gegevens zijn geen verdienmodel: er is niets om te verzamelen of te verkopen.</p>
+      <p><strong>Zelf gebruiken</strong> — start de tool, pak je belastingaangifte erbij en bouw je dossier stap voor stap op. De ingebouwde handleiding en het fictieve voorbeelddossier (familie Janssen) helpen je op weg.</p>
+      <p><strong>Of samen met je financieel adviseur</strong> — adviseurs delen FINdossier kosteloos met hun klanten, desgewenst in hun eigen huisstijl. Jij vult in, het adviseursrapport met grafieken en gespreksagenda gaat mee naar het jaarlijkse onderhoudsgesprek: klopt alles nog, past alles nog bij je doelen? Nog geen adviseur? Vind er één via <a href="https://www.hypothecairplanner.nl/zoek-een-hypotheekadviseur-voor-het-beste-advies" target="_blank" rel="noopener">hypothecairplanner.nl</a>.</p>
+      <p style="color:var(--tekst-zacht);font-size:13.5px;margin-bottom:0">FINdossier geeft zelf geen advies en beveelt geen producten aan — het levert jou en je adviseur de complete, actuele inventarisatie.</p>
     </div>
   </section>
 

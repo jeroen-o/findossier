@@ -55,6 +55,8 @@
   .viewtab{border:1px solid var(--grijs-lijn);border-bottom:none;background:#EDF1F4;color:var(--tekst-zacht);padding:10px 20px;border-radius:10px 10px 0 0;cursor:pointer;font-weight:700;font-size:14.5px}
   .viewtab.actief{background:#fff;color:var(--hb-blauw);border-color:var(--hb-blauw)}
   .viewtab:focus-visible{outline:3px solid var(--hb-oranje);outline-offset:2px}
+  textarea.vrijtekst{width:100%;min-height:110px;border:1px solid var(--grijs-lijn);border-radius:8px;padding:10px 12px;font:inherit;font-size:14px;resize:vertical}
+  textarea.vrijtekst:focus{outline:2px solid var(--hb-blauw);border-color:var(--hb-blauw)}
   .fam-tabel td.fam-label{font-size:10.5px;font-weight:700;letter-spacing:.5px;color:var(--tekst-zacht);white-space:nowrap;vertical-align:middle}
   .fam-partnerrij td{background:var(--hb-blauw-l)}
   .dossierbalk{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
@@ -185,6 +187,7 @@
     <button id="vt-nalatenschap" class="viewtab" onclick="toonView('nalatenschap')">Nalatenschapsdossier</button>
     <button id="vt-wensen" class="viewtab" onclick="toonView('wensen')">Wensen &amp; doelen</button>
     <button id="vt-kompas" class="viewtab" onclick="toonView('kompas')">Kompas</button>
+    <button id="vt-aantekeningen" class="viewtab" onclick="toonView('aantekeningen')">Aantekeningen</button>
     <button id="vt-handleiding" class="viewtab" onclick="toonView('handleiding')">Handleiding</button>
   </div>
 
@@ -460,7 +463,11 @@
       <h2>Belangrijke personen</h2>
       <div class="sub">Financieel adviseur, notaris, dokter, executeur testamentair, accountant en andere contactpersonen — met naam, adres, woonplaats, telefoon en e-mail (NAWTE) per persoon. Vink "Nood" aan om iemand in de noodlijst hierboven te zetten. Deze gegevens gelden voor het hele dossier, niet per jaar.</div>
       <div class="tabelscroll"><div id="contactentabel"></div></div>
-      <button class="btn-klein" onclick="voegContactToe()">+ Persoon toevoegen</button>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        <button class="btn-klein" onclick="voegContactToe()">+ Persoon toevoegen</button>
+        <select id="fam-contact-select" style="border:1px solid var(--grijs-lijn);border-radius:7px;padding:7px 10px;font-size:13px"></select>
+        <button class="btn-klein" onclick="voegFamilieContactToe()">+ Familielid als contactpersoon</button>
+      </div>
     </section>
 
   </div><!-- einde view-contacten -->
@@ -525,6 +532,12 @@
   </div><!-- einde view-nalatenschap -->
 
   <div id="view-wensen" hidden>
+
+    <section class="kaart">
+      <h2>In uw eigen woorden</h2>
+      <div class="sub">Vrije ruimte voor wat niet in een tabel past: waarom deze doelen belangrijk zijn, wat u uw gezin gunt, afwegingen, dromen of context voor uw adviseur. Deze tekst gaat mee in de export en de afdrukken.</div>
+      <textarea class="vrijtekst" id="wensen-tekst" placeholder="Bijv.: We willen rond ons 65e rustiger aan doen. De studiepot voor Sanne en Tim gaat vóór de grote reis. Als er iets met ons gebeurt, willen we dat de kinderen zonder zorgen in het huis kunnen blijven wonen…"></textarea>
+    </section>
 
     <div class="toolbar">
       <div style="flex:1"></div>
@@ -621,6 +634,21 @@
 
   </div><!-- einde view-kompas -->
 
+  <div id="view-aantekeningen" hidden>
+    <div class="toolbar">
+      <div style="flex:1"></div>
+      <button class="btn btn-secundair" onclick="exporteer()">Exporteren</button>
+      <button class="btn btn-secundair" onclick="printTab('aantekeningen')">Tabblad afdrukken</button>
+      <button class="btn btn-secundair" onclick="printOverzicht()">Alles afdrukken</button>
+    </div>
+    <section class="kaart">
+      <h2>Aantekeningen</h2>
+      <div class="sub">Persoonlijk logboek bij uw dossier: gesprekken met uw adviseur of notaris, besluiten, telefoontjes met verzekeraars, dingen om volgend jaar op te pakken. Met datum en onderwerp, nieuwste bovenaan.</div>
+      <div id="notitieslijst"></div>
+      <button class="btn-klein" onclick="voegNotitieToe()">+ Aantekening toevoegen</button>
+    </section>
+  </div><!-- einde view-aantekeningen -->
+
   <div id="view-handleiding" hidden>
 
     <div class="toolbar">
@@ -644,20 +672,20 @@
       <div class="sub" style="margin-bottom:8px"><strong>De belangrijkste regel:</strong> FINdossier slaat niets automatisch op. Exporteer na elke sessie.</div>
       <p style="font-size:14px;margin-bottom:6px"><strong>Exporteren</strong> bewaart alles als één bestand. Met een wachtwoord wordt het versleuteld (AES-256) — zonder dat wachtwoord is het door niemand te openen, bewaar het dus op een vindbare plek.</p>
       <p style="font-size:14px;margin-bottom:6px"><strong>Importeren</strong> laadt een eerder geëxporteerd bestand weer in.</p>
-      <p style="font-size:14px;margin-bottom:6px"><strong>CSV</strong> maakt een uitdraai voor Excel (niet versleuteld, niet importeerbaar). <strong>Afdrukken</strong> kan per tabblad of van alles tegelijk; kies in het printvenster "Opslaan als PDF" om een digitale kopie te bewaren.</p>
+      <p style="font-size:14px;margin-bottom:6px"><strong>CSV</strong> maakt een uitdraai voor Excel (niet versleuteld, niet importeerbaar). <strong>Afdrukken</strong> kan per tabblad of van alles tegelijk — inclusief grafieken ("In één oogopslag") en het familieschema. Kies in het printvenster "Opslaan als PDF" om een digitale kopie te bewaren.</p>
       <p style="font-size:14px;margin-bottom:6px"><strong>Automatisch bewaren (opt-in):</strong> via het vinkje bovenaan bewaart de tool alles automatisch in deze browser — handig, maar onversleuteld en alleen op dit apparaat. Op een gedeelde of openbare computer: uit laten staan. Exporteren blijft altijd uw echte back-up.</p>
       <p style="font-size:14px;margin-bottom:0"><strong>Meerdere dossiers:</strong> via de dossierbalk bovenaan beheert u meerdere dossiers naast elkaar (bijv. uw eigen dossier en dat van een ouder). "Voorbeeld laden" opent een volledig fictief demodossier om de tool te verkennen.</p>
     </section>
 
     <section class="kaart">
       <h2>De tabbladen in het kort</h2>
-      <p style="font-size:14px;margin-bottom:6px"><strong>Vermogen &amp; inkomen</strong> — per jaar alle posten met tenaamstelling, werkelijk rendement, fiscale claim (eigen inschatting, lump sum over alle boxen) en automatische overzichten: samenvatting, vermogensmutatie, vervaldata, onderpanden met LTV en grafieken. De <strong>i</strong>-knop bij polissen en pensioen opent een rekenhulp voor eindwaarde en uitkering.</p>
+      <p style="font-size:14px;margin-bottom:6px"><strong>Vermogen &amp; inkomen</strong> — per jaar alle posten met tenaamstelling, werkelijk rendement, fiscale claim (eigen inschatting, lump sum over alle boxen) en automatische overzichten: samenvatting met cirkeldiagram van de bezitsverdeling, vermogensmutatie, vervaldata, onderpanden met LTV en grafieken. De <strong>i</strong>-knop bij polissen en pensioen opent een rekenhulp voor eindwaarde en uitkering.</p>
       <p style="font-size:14px;margin-bottom:6px"><strong>Familie &amp; schenkingen</strong> — registreer uw samenlevingsvorm (huwelijk, geregistreerd partnerschap, samenlevingscontract of samenwonend) met datum en vermogensregime, en bouw de familieboom: kinderen gezamenlijk of van één partner, kleinkinderen gekoppeld aan het juiste kind. Het schema tekent de lijnen automatisch, met de relatievorm op de partnerlijn. Plus het schenkingsregister met totalen per ontvanger en jaar (eigen registratie, geen aangifte schenkbelasting).</p>
       <p style="font-size:14px;margin-bottom:6px"><strong>Overige verzekeringen</strong> — alle polissen met polisnummer, dekking, premie en vervaldatum, plus een premie-overzicht per soort.</p>
-      <p style="font-size:14px;margin-bottom:6px"><strong>Belangrijke personen</strong> — adviseur, notaris, huisarts, executeur en meer, met NAWTE-gegevens en een nood-markering voor het blok "Wie bellen in nood".</p>
+      <p style="font-size:14px;margin-bottom:6px"><strong>Belangrijke personen</strong> — adviseur, notaris, huisarts, executeur en meer, met NAWTE-gegevens en een nood-markering voor het blok "Wie bellen in nood". Familieleden voegt u met één klik toe vanuit de familieboom — ook zij kunnen noodcontact zijn.</p>
       <p style="font-size:14px;margin-bottom:6px"><strong>Nalatenschapsdossier</strong> — eerste stappen voor nabestaanden (automatisch samengesteld), toegang tot dit dossier, documentenregister, digitale nalatenschap, uitvaartwensen en abonnementen. Gouden regel: nooit wachtwoorden of seed phrases noteren — alleen vindplaatsen.</p>
-      <p style="font-size:14px;margin-bottom:6px"><strong>Wensen &amp; doelen</strong> — doelen met streefjaar, benodigd en gereserveerd bedrag, voortgang en een tijdlijn met de AOW-datums als referentie.</p>
-      <p style="font-size:14px;margin-bottom:0"><strong>Kompas</strong> — uitgaven en cashflow, vermogensprojectie met eigen aannames, koers-dashboard per doel, scenario's (rendement, inleg stopt, renteopslag, overlijden) en het adviseursrapport. Herijk jaarlijks na de aangifte. Alles is indicatief — geen advies.</p>
+      <p style="font-size:14px;margin-bottom:6px"><strong>Wensen &amp; doelen</strong> — doelen met streefjaar, benodigd en gereserveerd bedrag, voortgang en een tijdlijn met de AOW-datums als referentie, plus vrije ruimte "In uw eigen woorden" voor context en motivatie. Het losse tabblad <strong>Aantekeningen</strong> is uw logboek: gesprekken, besluiten en actiepunten met datum en onderwerp.</p>
+      <p style="font-size:14px;margin-bottom:0"><strong>Kompas</strong> — uitgaven en cashflow, vermogensprojectie met eigen aannames, koers-dashboard per doel, scenario's (rendement, inleg stopt, renteopslag, overlijden) en het adviseursrapport met grafieken (bezitsverdeling, vermogensontwikkeling, cashflow). Herijk jaarlijks na de aangifte. Alles is indicatief — geen advies.</p>
     </section>
 
     <section class="kaart">
@@ -684,7 +712,7 @@
     <section class="kaart">
       <h2>Versie</h2>
       <p style="font-size:14px;margin-bottom:6px">U gebruikt versie <strong id="versie-label"></strong>.</p>
-      <p style="font-size:14px;margin-bottom:6px"><strong>1.2.0</strong> — nieuwe familieboom: relatie &amp; samenlevingsvorm (huwelijk, geregistreerd partnerschap, samenlevingscontract, samenwonend) met datum en vermogensregime op de partnerlijn, kleinkinderen en achterkleinkinderen gekoppeld aan het juiste kind met echte ouder-kindlijnen, vernieuwd schema-ontwerp en herbouwde bewerktabel.</p>
+      <p style="font-size:14px;margin-bottom:6px"><strong>1.2.0</strong> — nieuwe familieboom: relatie &amp; samenlevingsvorm (huwelijk, geregistreerd partnerschap, samenlevingscontract, samenwonend) met datum en vermogensregime op de partnerlijn, kleinkinderen en achterkleinkinderen gekoppeld aan het juiste kind met echte ouder-kindlijnen, vernieuwd schema-ontwerp en herbouwde bewerktabel. Daarnaast: cirkeldiagram van de bezitsverdeling in de tool, grafieken in alle prints en het adviseursrapport ("In één oogopslag"), en het familieschema in de afdrukken.</p>
       <p style="font-size:14px;margin-bottom:6px"><strong>1.1.0</strong> — automatisch bewaren in de browser (opt-in), meerdere dossiers, voorbeelddossier, ongedaan maken bij verwijderen, invoercontroles, partnerpensioen in het overlijdensscenario, inflatie in projectie en doelentoets, valuta-omrekenkolom, testament-typelabel, white-label voor adviseurs.</p>
       <p style="font-size:14px;margin-bottom:0"><strong>1.0.0</strong> — eerste versie: vermogen &amp; inkomen per jaar, familie &amp; schenkingen, verzekeringen, belangrijke personen, nalatenschapsdossier, wensen &amp; doelen, Kompas, versleutelde export en prints.</p>
     </section>
@@ -1188,6 +1216,12 @@ document.addEventListener("input", e=>{
     if(k){ familie.relatie[k] = el.value; markeerGewijzigd(); renderFamilieSchema(); }
     return;
   }
+  if(ds.not){
+    const nt = notities.find(n=>n.id===ds.not);
+    if(nt){ nt[ds.k] = el.value; markeerGewijzigd(); }
+    return;
+  }
+  if(el.id==="wensen-tekst"){ wensenTekst = el.value; markeerGewijzigd(); return; }
   if(el.id==="fam-voetnoot"){ familie.voetnoot = el.value; markeerGewijzigd(); renderFamilieSchema(); return; }
   if(ds.sch){
     const s = familie.schenkingen.find(x=>x.id===ds.sch);
@@ -1373,7 +1407,7 @@ const SCHENK_SOORTEN = ["Jaarlijkse schenking","Eenmalig verhoogde schenking","S
 let verzekeringen = [];
 let contacten = [];
 const VERZ_SOORTEN = ["Inboedel","Opstal","Aansprakelijkheid (AVP)","Rechtsbijstand","Uitvaart","Auto","Motor","Boot / vaartuig","Caravan / camper","Ongevallen","Zorgverzekering","Fiets / e-bike","Reis","Annulering","Kostbaarheden","Huisdier","Anders"];
-const CONTACT_ROLLEN = ["Financieel adviseur","Notaris","Huisarts / dokter","Executeur testamentair","Accountant / boekhouder","Belastingadviseur","Verzekeringsadviseur","Hypotheekadviseur","Noodcontact","Overig"];
+const CONTACT_ROLLEN = ["Financieel adviseur","Notaris","Huisarts / dokter","Executeur testamentair","Accountant / boekhouder","Belastingadviseur","Verzekeringsadviseur","Hypotheekadviseur","Familielid","Noodcontact","Overig"];
 
 function leegVerzekering(){ return {id:uid(), soort:"", maatschappij:"", polisnr:"", dekking:"", verzekerd:0, premie:0, start:"", eind:"", eigenaar:"samen", notitie:""}; }
 function leegContact(){ return {id:uid(), rol:"", naam:"", organisatie:"", adres:"", woonplaats:"", telefoon:"", email:"", nood:false, notitie:""}; }
@@ -1384,6 +1418,25 @@ function verwijderVerzekering(id){
   const [v] = verzekeringen.splice(idx,1);
   markeerGewijzigd(); renderVerzekeringenAlles();
   toonUndo(`Verzekering "${escapeHtml(v.soort||v.maatschappij||"polis")}" verwijderd.`, ()=>{ verzekeringen.splice(idx,0,v); renderVerzekeringenAlles(); });
+}
+function vulFamContactSelect(){
+  const sel = document.getElementById("fam-contact-select");
+  if(!sel) return;
+  sel.innerHTML = '<option value="">— kies familielid —</option>' +
+    familie.leden.filter(l=>!l.overleden && l.naam).map(l=>`<option value="${l.id}">${escapeHtml(l.naam)} (${escapeHtml(l.relatie||"familie")})</option>`).join("");
+}
+function voegFamilieContactToe(){
+  const sel = document.getElementById("fam-contact-select");
+  const lid = familie.leden.find(l=>l.id===sel.value);
+  if(!lid){ alert("Kies eerst een familielid uit de lijst (tabblad Familie & schenkingen)."); return; }
+  if(contacten.some(c=>c.rol==="Familielid" && c.naam===lid.naam)){ alert("Dit familielid staat al bij de contactpersonen."); return; }
+  const c = leegContact();
+  c.rol = "Familielid";
+  c.naam = lid.naam;
+  c.notitie = lid.relatie ? lid.relatie + (kantVan(lid)!=="samen" ? " van " + naam(kantVan(lid)) : "") : "";
+  contacten.push(c);
+  markeerGewijzigd();
+  renderContactenAlles();
 }
 function voegContactToe(){ contacten.push(leegContact()); markeerGewijzigd(); renderContactenAlles(); }
 function verwijderContact(id){
@@ -1476,7 +1529,8 @@ function renderNoodlijst(){
       <span style="font-size:14px">${c.telefoon?"☎ "+escapeHtml(c.telefoon):""}${c.telefoon&&c.email?" — ":""}${c.email?"✉ "+escapeHtml(c.email):""}</span>
     </div>`).join("");
 }
-function renderContactenAlles(){ renderNoodlijst(); renderContacten(); }
+function renderContactenAlles(){
+  vulFamContactSelect(); renderNoodlijst(); renderContacten(); }
 
 /* =================== Nalatenschapsdossier =================== */
 let nalatenschap = {
@@ -1492,7 +1546,7 @@ const ABO_ACTIES = ["Opzeggen","Overzetten op partner","Behouden","Nader bekijke
 
 function leegDocument(){ return {id:uid(), soort:"", typeLabel:"", vanWie:"samen", datum:"", vindplaats:"", bewaarder:"", notitie:""}; }
 function leegDigitaal(){ return {id:uid(), soort:"", oms:"", vindplaats:"", vanWie:"samen", notitie:""}; }
-function leegAbonnement(){ return {id:uid(), oms:"", aanbieder:"", kosten:0, actie:"", vanWie:"samen", notitie:""}; }
+function leegAbonnement(){ return {id:uid(), oms:"", aanbieder:"", contractnr:"", email:"", kosten:0, actie:"", vanWie:"samen", notitie:""}; }
 
 function voegDocumentToe(){ nalatenschap.documenten.push(leegDocument()); markeerGewijzigd(); renderNalatenschapAlles(); }
 function verwijderDocument(id){
@@ -1565,12 +1619,14 @@ function renderDigitaal(){
 function renderAbonnementen(){
   const host = document.getElementById("abonnemententabel");
   if(!nalatenschap.abonnementen.length){ host.innerHTML = '<div class="leeg">Nog geen abonnementen vastgelegd.</div>'; return; }
-  let html = `<table class="lijst"><thead><tr><th>Omschrijving</th><th>Aanbieder</th><th>Kosten p/mnd</th><th>Bij overlijden</th><th>Van wie</th><th>Notitie</th><th></th></tr></thead><tbody>`;
+  let html = `<table class="lijst"><thead><tr><th>Omschrijving</th><th>Aanbieder</th><th>Contractnr / klantnr</th><th>E-mailadres account</th><th>Kosten p/mnd</th><th>Bij overlijden</th><th>Van wie</th><th>Notitie</th><th></th></tr></thead><tbody>`;
   nalatenschap.abonnementen.forEach(a=>{
     const acties = ABO_ACTIES.map(o=>`<option${a.actie===o?" selected":""}>${o}</option>`).join("");
     html += `<tr>
       <td><input value="${escapeHtml(a.oms)}" placeholder="Bijv. energie, internet, streaming, sportschool" data-abo="${a.id}" data-k="oms"></td>
       <td><input value="${escapeHtml(a.aanbieder)}" data-abo="${a.id}" data-k="aanbieder"></td>
+      <td><input value="${escapeHtml(a.contractnr)}" placeholder="Bijv. klantnr 12345" data-abo="${a.id}" data-k="contractnr"></td>
+      <td><input type="email" value="${escapeHtml(a.email)}" placeholder="Waarmee is het afgesloten" data-abo="${a.id}" data-k="email"></td>
       <td><input class="geld" inputmode="numeric" value="${toonNL(a.kosten)}" data-abo="${a.id}" data-k="kosten" data-t="euro"></td>
       <td><select data-abo="${a.id}" data-k="actie"><option value=""></option>${acties}</select></td>
       <td>${vanWieSelect("abo", a.id, a.vanWie)}</td>
@@ -1579,7 +1635,7 @@ function renderAbonnementen(){
     </tr>`;
   });
   const tot = nalatenschap.abonnementen.reduce((a,x)=>a+(x.kosten||0),0);
-  html += `</tbody><tfoot><tr><td>Totaal</td><td></td><td>${euro(tot)}</td><td></td><td></td><td></td><td></td></tr></tfoot></table>`;
+  html += `</tbody><tfoot><tr><td>Totaal</td><td></td><td></td><td></td><td>${euro(tot)}</td><td></td><td></td><td></td><td></td></tr></tfoot></table>`;
   host.innerHTML = html;
 }
 
@@ -1640,6 +1696,9 @@ function renderNalatenschapAlles(){
 
 /* =================== Wensen en doelstellingen =================== */
 let wensen = [];
+let wensenTekst = "";
+let notities = [];
+function leegNotitie(){ return {id:uid(), datum:new Date().toISOString().slice(0,10), onderwerp:"", tekst:""}; }
 const WENS_CATS = [
   ["Financieel","#005C9E"],["Reizen","#F39200"],["Eerder stoppen met werken","#00426F"],
   ["Goed doel / schenken","#2E9E5B"],["Zorg / mantelzorg","#C0392B"],["Studie / ontwikkeling","#7B4FA6"],
@@ -1787,7 +1846,28 @@ function renderWensenOverzicht(){
   tbl.innerHTML = html;
 }
 
-function renderWensenAlles(){ renderWensen(); renderWensenTijdlijn(); renderWensenOverzicht(); }
+function renderWensenAlles(){ renderWensen(); renderWensenTijdlijn(); renderWensenOverzicht(); document.getElementById("wensen-tekst").value = wensenTekst; }
+function voegNotitieToe(){ notities.unshift(leegNotitie()); markeerGewijzigd(); renderNotities(); }
+function verwijderNotitie(id){
+  const idx = notities.findIndex(n=>n.id===id);
+  const [nt] = notities.splice(idx,1);
+  markeerGewijzigd(); renderNotities();
+  toonUndo("Aantekening verwijderd.", ()=>{ notities.splice(idx,0,nt); renderNotities(); });
+}
+function renderNotities(){
+  const host = document.getElementById("notitieslijst");
+  if(!notities.length){ host.innerHTML = '<div class="leeg">Nog geen aantekeningen.</div>'; return; }
+  const lijst = notities.slice().sort((a,b)=>String(b.datum).localeCompare(String(a.datum)));
+  host.innerHTML = lijst.map(n=>`
+    <div style="border:1px solid var(--grijs-lijn);border-radius:9px;padding:12px 14px;margin-bottom:10px;background:#FAFBFC">
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:8px">
+        <input type="date" value="${n.datum||""}" data-not="${n.id}" data-k="datum" style="width:150px">
+        <input value="${escapeHtml(n.onderwerp)}" placeholder="Onderwerp — bijv. Gesprek adviseur, Besluit verbouwing" data-not="${n.id}" data-k="onderwerp" style="flex:1;min-width:200px;font-weight:600">
+        <button class="verwijder" title="Verwijderen" aria-label="Aantekening verwijderen" onclick="verwijderNotitie('${n.id}')">✕</button>
+      </div>
+      <textarea class="vrijtekst" style="min-height:70px" placeholder="Uw aantekening…" data-not="${n.id}" data-k="tekst">${escapeHtml(n.tekst)}</textarea>
+    </div>`).join("");
+}
 
 /* =================== Kompas: cashflow, projectie en scenario's =================== */
 let kompas = { rendement:3, inleg:0, horizon:30, inflatie:2, scRendement:1, scStopJaar:0, renteOpslag:2, herijkt:"" };
@@ -2016,7 +2096,7 @@ function renderKompasAlles(){
   renderOverlijdensScenario();
 }
 
-const VIEW_NAMEN = {vermogen:"Vermogen & inkomen", familie:"Familie & schenkingen", verzekeringen:"Overige verzekeringen", contacten:"Belangrijke personen", nalatenschap:"Nalatenschapsdossier", wensen:"Wensen & doelen", kompas:"Kompas", handleiding:"Handleiding"};
+const VIEW_NAMEN = {vermogen:"Vermogen & inkomen", familie:"Familie & schenkingen", verzekeringen:"Overige verzekeringen", contacten:"Belangrijke personen", nalatenschap:"Nalatenschapsdossier", wensen:"Wensen & doelen", kompas:"Kompas", aantekeningen:"Aantekeningen", handleiding:"Handleiding"};
 function toonView(v){
   Object.keys(VIEW_NAMEN).forEach(x=>{
     document.getElementById("view-"+x).hidden = v!==x;
@@ -2031,6 +2111,7 @@ function toonView(v){
   if(v==="nalatenschap") renderNalatenschapAlles();
   if(v==="wensen") renderWensenAlles();
   if(v==="kompas") renderKompasAlles();
+  if(v==="aantekeningen") renderNotities();
 }
 function toggleMenu(){
   const m = document.getElementById("viewtabs");
@@ -2253,7 +2334,7 @@ function renderFamilieSchema(){
 
   // --- breedtes en posities ---
   const kindBlokW = kinderen.length ? kinderen.reduce((t,k)=>t+breedteKind(k),0) + (kinderen.length-1)*GX : 0;
-  const relW = 120; // ruimte tussen partnerkaarten voor het relatielabel
+  const relW = 240; // ruimte tussen partnerkaarten voor het relatielabel
   const stelW = KW*2 + relW;
   const exP1 = exen.filter(e=>kantVan(e)==="p1"), exP2 = exen.filter(e=>kantVan(e)==="p2");
   const zijLinks = exP1.length*(KW+GX) + broers.filter(b=>kantVan(b)==="p1").length*(KW+GX);
@@ -2308,9 +2389,10 @@ function renderFamilieSchema(){
   if(vorm){
     const kort = {"Huwelijk":"⚭ Huwelijk","Geregistreerd partnerschap":"⚭ Geregistreerd partnerschap","Samenwonend met samenlevingscontract":"Samenlevingscontract","Samenwonend zonder contract":"Samenwonend","Anders / niet vastgelegd":"Relatie"}[vorm]||vorm;
     const dat = familie.relatie.datum ? " · " + toonDatum(familie.relatie.datum) : "";
-    out += `<text x="${cx}" y="${pY+KH/2-8}" text-anchor="middle" font-size="10.5" fill="${GRIJS}">${escapeHtml(kort+dat)}</text>`;
+    const halo = 'stroke="#fff" stroke-width="5" paint-order="stroke" stroke-linejoin="round"';
+    out += `<text x="${cx}" y="${pY+KH/2-9}" text-anchor="middle" font-size="10.5" fill="${GRIJS}" ${halo}>${escapeHtml(knip(kort+dat, 38))}</text>`;
     if(familie.relatie.voorwaarden && familie.relatie.voorwaarden!=="Niet van toepassing / onbekend")
-      out += `<text x="${cx}" y="${pY+KH/2+16}" text-anchor="middle" font-size="9.5" fill="${GRIJS}">${knip(familie.relatie.voorwaarden.replace(" (standaard sinds 2018)",""), 40)}</text>`;
+      out += `<text x="${cx}" y="${pY+KH/2+17}" text-anchor="middle" font-size="9.5" fill="${GRIJS}" ${halo}>${knip(familie.relatie.voorwaarden.replace(" (standaard sinds 2018)",""), 36)}</text>`;
   }
   lidKaart(p1x, pY, {naam:z1.naam, geboren:z1.geboren, overleden:"", notitie:z1.notitie}, {avatar:true});
   lidKaart(p2x, pY, {naam:z2.naam, geboren:z2.geboren, overleden:"", notitie:z2.notitie}, {avatar:true});
@@ -3073,7 +3155,7 @@ function downloadBlob(inhoud, bestandsnaam, mime){
 }
 async function exporteer(){
   const dNaam = (dossiers.find(x=>x.id===actiefDossierId)||{}).naam || "Mijn dossier";
-  const json = JSON.stringify({versie:11, toolVersie:TOOL_VERSIE, dossierNaam:dNaam, data, familie, verzekeringen, contacten, nalatenschap, wensen, kompas}, null, 2);
+  const json = JSON.stringify({versie:12, toolVersie:TOOL_VERSIE, dossierNaam:dNaam, data, familie, verzekeringen, contacten, nalatenschap, wensen, wensenTekst, notities, kompas}, null, 2);
   let pw = "";
   if(crypto && crypto.subtle){
     pw = prompt("Optioneel: wachtwoord om het bestand te versleutelen (AES-256).\nLeeg laten = onversleuteld exporteren. Bewaar het wachtwoord goed: zonder wachtwoord is het bestand niet te openen.");
@@ -3262,7 +3344,7 @@ function saneerBundel(obj){
   });
   if(Array.isArray(nb.abonnementen)) nb.abonnementen.forEach(src=>{
     const a = leegAbonnement();
-    ["oms","aanbieder","actie","vanWie","notitie"].forEach(k=>{ if(src[k]!==undefined) a[k]=String(src[k]); });
+    ["oms","aanbieder","contractnr","email","actie","vanWie","notitie"].forEach(k=>{ if(src[k]!==undefined) a[k]=String(src[k]); });
     a.kosten = Number(src.kosten)||0;
     if(!["p1","p2","samen"].includes(a.vanWie)) a.vanWie="samen";
     if(src.id) a.id=String(src.id);
@@ -3288,14 +3370,21 @@ function saneerBundel(obj){
     nKompas.scStopJaar = parseInt(obj.kompas.scStopJaar)||0;
     nKompas.herijkt = String(obj.kompas.herijkt||"");
   }
-  return {data:nData, familie:nFam, verzekeringen:nVerz, contacten:nCon, nalatenschap:nNal, wensen:nWens, kompas:nKompas};
+  const nNot = [];
+  if(Array.isArray(obj.notities)) obj.notities.forEach(src=>{
+    const nt = leegNotitie();
+    ["datum","onderwerp","tekst"].forEach(k=>{ if(src[k]!==undefined) nt[k]=String(src[k]); });
+    if(src.id) nt.id=String(src.id);
+    nNot.push(nt);
+  });
+  return {data:nData, familie:nFam, verzekeringen:nVerz, contacten:nCon, nalatenschap:nNal, wensen:nWens, wensenTekst:String(obj.wensenTekst||""), notities:nNot, kompas:nKompas};
 }
 function bundelState(){
-  return JSON.parse(JSON.stringify({data, familie, verzekeringen, contacten, nalatenschap, wensen, kompas}));
+  return JSON.parse(JSON.stringify({data, familie, verzekeringen, contacten, nalatenschap, wensen, wensenTekst, notities, kompas}));
 }
 function activeerBundel(b){
   data = b.data; familie = b.familie; verzekeringen = b.verzekeringen; contacten = b.contacten;
-  nalatenschap = b.nalatenschap; wensen = b.wensen; kompas = b.kompas;
+  nalatenschap = b.nalatenschap; wensen = b.wensen; wensenTekst = b.wensenTekst||""; notities = b.notities||[]; kompas = b.kompas;
   actiefJaar = Object.keys(data).sort().pop();
   renderAllesOveral();
 }
@@ -3525,7 +3614,7 @@ function laadVoorbeeld(){
       toegang:{bestand:"USB-stick in de kluis + kopie in cloudmap 'Dossier'",wachtwoord:"In de wachtwoordmanager, noodkit bij de notaris",wieWeet:"Partner en oudste kind"},
       documenten:[{soort:"Testament",typeLabel:"langstlevende",vanWie:"samen",datum:"2018-05-14",vindplaats:"Origineel bij notaris",bewaarder:"Notariskantoor Voorbeeld"}],
       digitaal:[{soort:"Wachtwoordmanager",oms:"Gezinskluis",vindplaats:"Noodkit in fysieke kluis",vanWie:"samen"}],
-      abonnementen:[{oms:"Internet en tv",aanbieder:"Provider X",kosten:62,actie:"Overzetten op partner",vanWie:"samen"},{oms:"Sportschool",aanbieder:"Gym Y",kosten:35,actie:"Opzeggen",vanWie:"p1"}],
+      abonnementen:[{oms:"Internet en tv",aanbieder:"Provider X",contractnr:"KL-884521",email:"jan.janssen@voorbeeld.nl",kosten:62,actie:"Overzetten op partner",vanWie:"samen"},{oms:"Sportschool",aanbieder:"Gym Y",kosten:35,actie:"Opzeggen",vanWie:"p1"}],
       uitvaart:{p1:{vorm:"Cremeren",ondernemer:"Via polis Verzekeraar H",donor:"Geregistreerd: donor",wensen:"Besloten kring"},p2:{vorm:"",ondernemer:"",donor:"",wensen:""}}
     },
     wensen:[
@@ -3653,7 +3742,7 @@ function bezitsVerdeling(j){
     .map(([label,cat],i)=>({label, val:catWaarde(j,cat), kleur:GRAFIEK_PALET[i%GRAFIEK_PALET.length]}))
     .filter(x=>x.val>0);
 }
-function svgDonut(items, titel){
+function svgDonut(items, titel, maxW){
   const tot = items.reduce((a,x)=>a+x.val,0);
   if(!tot) return "";
   const r=58, C=2*Math.PI*r; let acc=0;
@@ -3667,7 +3756,7 @@ function svgDonut(items, titel){
     `<text x="217" y="${38+i*22}" font-size="10.5" fill="#1E2A33">${escapeHtml(x.label)} — ${euro(x.val)} (${Math.round(x.val/tot*100)}%)</text>`
   ).join("");
   const hoog = Math.max(190, 34+items.length*22);
-  return `<svg viewBox="0 0 470 ${hoog}" style="width:100%;max-width:470px;height:auto" role="img" aria-label="${escapeHtml(titel)}">`+
+  return `<svg viewBox="0 0 470 ${hoog}" style="width:100%;max-width:${maxW||470}px;height:auto" role="img" aria-label="${escapeHtml(titel)}">`+
     `<text x="10" y="15" font-size="12" font-weight="700" fill="#00426F">${escapeHtml(titel)}</text>`+ segs +
     `<text x="95" y="92" text-anchor="middle" font-size="11" fill="#5C6B76">Totaal</text>`+
     `<text x="95" y="107" text-anchor="middle" font-size="12" font-weight="700" fill="#1E2A33">${kort(tot)}</text>`+ leg + `</svg>`;
@@ -3860,17 +3949,19 @@ function bouwNalatenschapPrint(){
   }).join("");
   if(uvRegels) b += `<h2>Uitvaartwensen en donorregistratie</h2><table><tr><th>Persoon</th><th>Uitvaartvorm</th><th>Ondernemer / polis</th><th>Donorregister</th><th>Wensen</th></tr>${uvRegels}</table>`;
   if(nl_.abonnementen.length){
-    b += `<h2>Abonnementen en vaste lasten</h2><table><tr><th>Omschrijving</th><th>Aanbieder</th><th class="r">Kosten p/mnd</th><th>Bij overlijden</th><th>Van wie</th></tr>`;
+    b += `<h2>Abonnementen en vaste lasten</h2><table><tr><th>Omschrijving</th><th>Aanbieder</th><th>Contractnr</th><th>E-mail account</th><th class="r">Kosten p/mnd</th><th>Bij overlijden</th><th>Van wie</th></tr>`;
     nl_.abonnementen.forEach(a=>{
-      b += `<tr><td>${escapeHtml(a.oms)}</td><td>${escapeHtml(a.aanbieder)}</td><td class="r">${a.kosten?euro(a.kosten):""}</td><td>${escapeHtml(a.actie)}</td><td>${escapeHtml(naam(a.vanWie))}</td></tr>`;
+      b += `<tr><td>${escapeHtml(a.oms)}</td><td>${escapeHtml(a.aanbieder)}</td><td>${escapeHtml(a.contractnr)}</td><td>${escapeHtml(a.email)}</td><td class="r">${a.kosten?euro(a.kosten):""}</td><td>${escapeHtml(a.actie)}</td><td>${escapeHtml(naam(a.vanWie))}</td></tr>`;
     });
-    b += `<tr class="tot"><td colspan="2">Totaal</td><td class="r">${euro(nl_.abonnementen.reduce((x,a)=>x+(a.kosten||0),0))}</td><td></td><td></td></tr></table>`;
+    b += `<tr class="tot"><td colspan="4">Totaal</td><td class="r">${euro(nl_.abonnementen.reduce((x,a)=>x+(a.kosten||0),0))}</td><td></td><td></td></tr></table>`;
   }
   return b || "<p>Nog geen nalatenschapsgegevens vastgelegd.</p>";
 }
 function bouwWensenPrint(){
-  if(!wensen.length) return "<p>Nog geen wensen of doelen vastgelegd.</p>";
-  let b = `<h2>Wensen en doelstellingen</h2><table><tr><th>Categorie</th><th>Omschrijving</th><th>Prioriteit</th><th>Streefjaar</th><th>Tot</th><th class="r">Benodigd</th><th class="r">Gereserveerd</th><th>Status</th><th>Voor wie</th></tr>`;
+  let kop = "";
+  if(wensenTekst) kop = `<h2>In eigen woorden</h2><p style="white-space:pre-wrap">${escapeHtml(wensenTekst)}</p>`;
+  if(!wensen.length) return kop || "<p>Nog geen wensen of doelen vastgelegd.</p>";
+  let b = kop + `<h2>Wensen en doelstellingen</h2><table><tr><th>Categorie</th><th>Omschrijving</th><th>Prioriteit</th><th>Streefjaar</th><th>Tot</th><th class="r">Benodigd</th><th class="r">Gereserveerd</th><th>Status</th><th>Voor wie</th></tr>`;
   wensen.slice().sort((a,w)=>(a.jaarVan||9999)-(w.jaarVan||9999)).forEach(w=>{
     b += `<tr><td>${escapeHtml(w.categorie)}</td><td>${escapeHtml(w.oms)}</td><td>${escapeHtml(w.prioriteit)}</td><td>${w.jaarVan||""}</td><td>${w.jaarTot||""}</td><td class="r">${w.benodigd?euro(w.benodigd):""}</td><td class="r">${w.gereserveerd?euro(w.gereserveerd):""}</td><td>${escapeHtml(w.status)}</td><td>${escapeHtml(naam(w.voorWie))}</td></tr>`;
   });
@@ -3893,9 +3984,17 @@ function bouwSchemaPrint(){
   if(!vb || !svg.innerHTML) return "";
   return `<h2>Familieschema</h2><svg viewBox="${vb}" style="width:100%;height:auto">${svg.innerHTML}</svg>`;
 }
+function bouwAantekeningenPrint(){
+  if(!notities.length) return "";
+  let b = `<h2>Aantekeningen</h2>`;
+  notities.slice().sort((a,x)=>String(x.datum).localeCompare(String(a.datum))).forEach(n=>{
+    b += `<p><strong>${n.datum?toonDatum(n.datum):""}${n.onderwerp?" — "+escapeHtml(n.onderwerp):""}</strong><br><span style="white-space:pre-wrap">${escapeHtml(n.tekst)}</span></p>`;
+  });
+  return b;
+}
 function printOverzicht(){
   const inhoud = `<h1>FINdossier — volledig overzicht ${actiefJaar}</h1>` + printKop() +
-    bouwVisueelPrint() + bouwFinancieelPrint() + bouwSchemaPrint() + bouwFamiliePrint() + bouwVerzekeringenPrint() + bouwContactenPrint() + bouwNalatenschapPrint() + bouwWensenPrint();
+    bouwVisueelPrint() + bouwFinancieelPrint() + bouwSchemaPrint() + bouwFamiliePrint() + bouwVerzekeringenPrint() + bouwContactenPrint() + bouwNalatenschapPrint() + bouwWensenPrint() + bouwAantekeningenPrint();
   openPrint(`FINdossier ${actiefJaar}`, inhoud, true);
 }
 function printTab(v){
@@ -3913,7 +4012,8 @@ function printTab(v){
     verzekeringen: ()=>["FINdossier — overige verzekeringen", bouwVerzekeringenPrint(), true],
     contacten:  ()=>["FINdossier — belangrijke personen", bouwContactenPrint(), true],
     nalatenschap: ()=>["FINdossier — nalatenschapsdossier", bouwNalatenschapPrint(), false],
-    wensen:     ()=>["FINdossier — wensen & doelen", bouwWensenPrint(), true]
+    wensen:     ()=>["FINdossier — wensen & doelen", bouwWensenPrint(), true],
+    aantekeningen: ()=>["FINdossier — aantekeningen", bouwAantekeningenPrint() || "<p>Nog geen aantekeningen.</p>", false]
   }[v];
   if(!bouw) return;
   const [titel, inhoud, liggend] = bouw();
@@ -4023,7 +4123,7 @@ function printAdviseursRapport(){
 /* =================== Init / render =================== */
 function renderOverzichten(){
   renderSamenvatting(); renderMutatie(); renderVervaldata(); renderOnderpanden(); renderBvBezit();
-  document.getElementById("bezitsdonut").innerHTML = svgDonut(bezitsVerdeling(actiefJaar), "Verdeling bezittingen " + actiefJaar);
+  document.getElementById("bezitsdonut").innerHTML = svgDonut(bezitsVerdeling(actiefJaar), "Verdeling bezittingen " + actiefJaar, 700);
   renderGrafiekFilterOpties(); renderStapel(); renderMeerjaren(); renderGrafiek();
 }
 function renderAlles(){
