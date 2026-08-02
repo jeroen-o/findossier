@@ -165,8 +165,8 @@
 <div class="wrap">
 
   <div class="melding">
-    <strong>Let op:</strong> gegevens worden standaard niet automatisch opgeslagen en nooit verstuurd. Gebruik <em>Opslaan</em> om alles als bestand te bewaren (met optioneel wachtwoord) en <em>Uploaden</em> om het later weer in te laden. Bewaar het exportbestand veilig: het bevat uw complete financiële gegevens.
-    <span class="autosave-regel"><input type="checkbox" id="autosave-toggle" onchange="zetAutoOpslaan(this.checked)"><label for="autosave-toggle"><strong>Bewaar automatisch in deze browser</strong> — onversleuteld, alleen op dit apparaat; opslaan als bestand blijft uw echte back-up.</label> <em id="autosave-status"></em></span>
+    <strong>Let op:</strong> er wordt nooit iets naar een server verstuurd. Uw dossier wordt standaard automatisch in deze browser bewaard (onversleuteld, alleen op dit apparaat) — zet het vinkje uit op een gedeelde of openbare computer. Gebruik <em>Opslaan</em> voor een bestand als echte back-up (met optioneel wachtwoord) en <em>Uploaden</em> om het later weer in te laden. Bewaar dat bestand veilig: het bevat uw complete financiële gegevens.
+    <span class="autosave-regel"><input type="checkbox" id="autosave-toggle" onchange="zetAutoOpslaan(this.checked)"><label for="autosave-toggle"><strong>Bewaar automatisch in deze browser</strong> (staat standaard aan) — onversleuteld, alleen op dit apparaat; opslaan als bestand blijft uw echte back-up.</label> <em id="autosave-status"></em></span>
   </div>
 
   <div class="dossierbalk">
@@ -673,7 +673,7 @@
       <p style="font-size:14px;margin-bottom:6px"><strong>Opslaan</strong> bewaart alles als één bestand. Met een wachtwoord wordt het versleuteld (AES-256) — zonder dat wachtwoord is het door niemand te openen, bewaar het dus op een vindbare plek.</p>
       <p style="font-size:14px;margin-bottom:6px"><strong>Uploaden</strong> laadt een eerder opgeslagen bestand weer in.</p>
       <p style="font-size:14px;margin-bottom:6px"><strong>CSV</strong> maakt een uitdraai voor Excel (niet versleuteld, niet importeerbaar). <strong>Afdrukken</strong> kan per tabblad of van alles tegelijk — inclusief grafieken ("In één oogopslag") en het familieschema. Kies in het printvenster "Opslaan als PDF" om een digitale kopie te bewaren.</p>
-      <p style="font-size:14px;margin-bottom:6px"><strong>Automatisch bewaren (opt-in):</strong> via het vinkje bovenaan bewaart de tool alles automatisch in deze browser — handig, maar onversleuteld en alleen op dit apparaat. Op een gedeelde of openbare computer: uit laten staan. Opslaan als bestand blijft altijd uw echte back-up.</p>
+      <p style="font-size:14px;margin-bottom:6px"><strong>Automatisch bewaren (staat standaard aan):</strong> de tool bewaart alles automatisch in deze browser — handig, maar onversleuteld en alleen op dit apparaat. Op een gedeelde of openbare computer: zet het vinkje bovenaan uit. Opslaan als bestand blijft altijd uw echte back-up.</p>
       <p style="font-size:14px;margin-bottom:0"><strong>Meerdere dossiers:</strong> via de dossierbalk bovenaan beheert u meerdere dossiers naast elkaar (bijv. uw eigen dossier en dat van een ouder). "Voorbeeld laden" opent een volledig fictief demodossier om de tool te verkennen.</p>
     </section>
 
@@ -4164,6 +4164,7 @@ function renderAlles(){
     data[jr] = leegJaar(jr);
     actiefJaar = jr;
     renderAlles();
+    if(opslagBeschikbaar()){ autoOpslaan = true; slaLokaalOp(); }
   }
   renderDossiers();
   document.getElementById("autosave-toggle").checked = autoOpslaan;
