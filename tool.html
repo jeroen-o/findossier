@@ -2387,12 +2387,15 @@ function renderFamilieSchema(){
   // relatielabel op de partnerlijn
   const vorm = familie.relatie.vorm;
   if(vorm){
-    const kort = {"Huwelijk":"⚭ Huwelijk","Geregistreerd partnerschap":"⚭ Geregistreerd partnerschap","Samenwonend met samenlevingscontract":"Samenlevingscontract","Samenwonend zonder contract":"Samenwonend","Anders / niet vastgelegd":"Relatie"}[vorm]||vorm;
+    const kort = {"Huwelijk":"Huwelijk","Geregistreerd partnerschap":"Geregistreerd partnerschap","Samenwonend met samenlevingscontract":"Samenlevingscontract","Samenwonend zonder contract":"Samenwonend","Anders / niet vastgelegd":"Relatie"}[vorm]||vorm;
     const dat = familie.relatie.datum ? " · " + toonDatum(familie.relatie.datum) : "";
     const halo = 'stroke="#fff" stroke-width="5" paint-order="stroke" stroke-linejoin="round"';
-    out += `<text x="${cx}" y="${pY+KH/2-9}" text-anchor="middle" font-size="10.5" fill="${GRIJS}" ${halo}>${escapeHtml(knip(kort+dat, 38))}</text>`;
+    // symbool op de lijn zelf (twee ringen), tekst erboven en eronder — nooit door de kaders
+    out += `<circle cx="${cx-5}" cy="${pY+KH/2}" r="6" fill="#fff" stroke="${GOUD}" stroke-width="1.6"/>`;
+    out += `<circle cx="${cx+5}" cy="${pY+KH/2}" r="6" fill="#fff" stroke="${GOUD}" stroke-width="1.6"/>`;
+    out += `<text x="${cx}" y="${pY-14}" text-anchor="middle" font-size="11" font-weight="600" fill="${INKT}" ${halo}>${escapeHtml(kort+dat)}</text>`;
     if(familie.relatie.voorwaarden && familie.relatie.voorwaarden!=="Niet van toepassing / onbekend")
-      out += `<text x="${cx}" y="${pY+KH/2+17}" text-anchor="middle" font-size="9.5" fill="${GRIJS}" ${halo}>${knip(familie.relatie.voorwaarden.replace(" (standaard sinds 2018)",""), 36)}</text>`;
+      out += `<text x="${cx}" y="${pY+KH+18}" text-anchor="middle" font-size="9.5" fill="${GRIJS}" ${halo}>${escapeHtml(familie.relatie.voorwaarden.replace(" (standaard sinds 2018)",""))}</text>`;
   }
   lidKaart(p1x, pY, {naam:z1.naam, geboren:z1.geboren, overleden:"", notitie:z1.notitie}, {avatar:true});
   lidKaart(p2x, pY, {naam:z2.naam, geboren:z2.geboren, overleden:"", notitie:z2.notitie}, {avatar:true});
