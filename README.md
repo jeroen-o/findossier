@@ -1,6 +1,6 @@
 # FINdossier.nl
 
-**Actuele toolversie: 1.1.0 — augustus 2026** (zie versiegeschiedenis in de tool, tabblad Handleiding)
+**Actuele toolversie: 1.2.0 — augustus 2026** (zie versiegeschiedenis in de tool, tabblad Handleiding)
 
 FINdossier is je persoonlijke financiële dossier dat je één keer opbouwt en daarna jaarlijks bijwerkt — zelf, of samen met je adviseur. Zo weet jij altijd hoe je ervoor staat, en weten je nabestaanden waar alles te vinden is als jou iets overkomt.
 
@@ -10,7 +10,8 @@ De tool is één standalone HTML-bestand: geen server, geen database, geen build
 
 | Bestand | Doel |
 |---|---|
-| `index.html` | De volledige FINdossier-tool (7 tabbladen + ingebouwde handleiding) |
+| `index.html` | Homepage / landingspagina met uitleg voor consument en adviseur, FAQ en de SEO/GEO structured data (WebApplication + FAQPage) |
+| `tool.html` | De volledige FINdossier-tool (8 tabbladen incl. ingebouwde handleiding) |
 | `handleiding.html` | Losse, printbare handleiding |
 | `robots.txt` / `sitemap.xml` | SEO |
 | `CNAME` | Custom domain voor GitHub Pages (findossier.nl) |
