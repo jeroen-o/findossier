@@ -3622,6 +3622,11 @@ function laadVoorbeeld(){
       {categorie:"Studie / ontwikkeling",oms:"Studiepot kinderen",prioriteit:"Hoog",jaarVan:nu+2,jaarTot:nu+8,benodigd:45000,gereserveerd:28000,status:"In uitvoering",voorWie:"samen"},
       {categorie:"Eerder stoppen met werken",oms:"Stoppen rond 65",prioriteit:"Hoog",jaarVan:nu+11,benodigd:120000,gereserveerd:15000,status:"Gepland",voorWie:"p1"}
     ],
+    wensenTekst:"We willen rond ons 65e rustiger aan doen — niet per se helemaal stoppen, maar wel de vrijheid hebben om minder te werken. De studiepot voor Sanne en Tim gaat vóór de grote reis. En als ons iets overkomt, willen we dat de kinderen zonder geldzorgen kunnen blijven wonen waar ze nu wonen. Dit dossier is er zodat zij dan niet hoeven te zoeken.",
+    notities:[
+      {datum:j1+"-04-02", onderwerp:"Belastingaangifte "+j0+" verwerkt", tekst:"Alle standen bijgewerkt in FINdossier. Spaarrekening flink gegroeid door bonus. Volgend jaar: beleggingsmix bespreken."},
+      {datum:j1+"-09-15", onderwerp:"Gesprek F. de Adviseur", tekst:"Rentevastperiode van beide leningdelen loopt af in "+(nu+2)+". Afgesproken: begin "+(nu+1)+" opties vergelijken. Ook ORV-dekking nakijken nu de hypotheek daalt."}
+    ],
     kompas:{rendement:3, inleg:0, horizon:25, inflatie:2, scRendement:1, scStopJaar:0, renteOpslag:2, herijkt:""}
   };
   // tweede jaar als kloon met kleine mutaties
@@ -3782,23 +3787,38 @@ function svgStaven(paren, titel, kleur){
     `<line x1="${padL}" y1="${grondY}" x2="${W-padL}" y2="${grondY}" stroke="#D9E0E6"/>`+ staven + `</svg>`;
 }
 function printStijl(liggend){
-  return `<style>@page{size:A4 ${liggend?"landscape":"portrait"};margin:14mm}
-    body{font-family:Segoe UI,Arial,sans-serif;color:#1E2A33;padding:10px;font-size:11.5px}
-    h1{color:#005C9E;font-size:19px}h2{color:#005C9E;font-size:13px;margin:18px 0 6px;text-transform:uppercase;letter-spacing:.5px}
+  return `<style>@page{size:A4 ${liggend?"landscape":"portrait"};margin:13mm}
+    *{box-sizing:border-box}
+    body{font-family:Segoe UI,Arial,sans-serif;color:#1E2A33;padding:0;font-size:11.5px;line-height:1.45}
+    h1{background:linear-gradient(100deg,#00426F,#005C9E);color:#fff;font-size:20px;padding:16px 22px;border-radius:10px;margin-bottom:4px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    h1 span.merk{display:block;font-size:10px;font-weight:400;letter-spacing:2px;text-transform:uppercase;opacity:.85;margin-bottom:4px}
+    h2{color:#00426F;font-size:12.5px;margin:20px 0 8px;text-transform:uppercase;letter-spacing:.8px;border-left:4px solid #F39200;padding:3px 0 3px 10px;background:#F7FAFC;-webkit-print-color-adjust:exact;print-color-adjust:exact;break-after:avoid}
     h3{color:#00426F;font-size:12px;margin:10px 0 4px}
-    table{border-collapse:collapse;width:100%;font-size:10.5px;margin-bottom:6px}
-    th,td{border-bottom:1px solid #D9E0E6;padding:4px 6px;text-align:left;vertical-align:top}
-    th{background:#E8F1F8;color:#00426F}td.r,th.r{text-align:right}
-    tr.tot td{font-weight:700}p{margin-bottom:6px}p.dis{font-size:10px;color:#5C6B76;margin-top:18px;line-height:1.5}
-    .sam td.neg{color:#C0392B}.sam tr.eind td{font-weight:700;background:#E8F1F8}.sam tr.memo td{color:#5C6B76;font-style:italic}
-    td.neg{color:#C0392B}</style>`;
+    table{border-collapse:collapse;width:100%;font-size:10.5px;margin-bottom:8px}
+    th,td{border-bottom:1px solid #E4EAEF;padding:5px 7px;text-align:left;vertical-align:top}
+    th{background:#005C9E;color:#fff;font-weight:600;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    tbody tr:nth-child(even) td, table tr:nth-child(even) td{background:#F7FAFC;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    td.r,th.r{text-align:right}
+    tr.tot td{font-weight:700;background:#E8F1F8 !important;border-top:2px solid #005C9E}
+    p{margin-bottom:6px}
+    p.dis{font-size:9.5px;color:#5C6B76;margin-top:20px;line-height:1.5;border-top:1px solid #D9E0E6;padding-top:8px}
+    .sam td.neg{color:#C0392B}.sam tr.eind td{font-weight:700;background:#E8F1F8 !important;border-top:2px solid #005C9E}.sam tr.memo td{color:#5C6B76;font-style:italic;background:#fff !important}
+    td.neg{color:#C0392B}
+    svg{break-inside:avoid}
+    .printbalk{position:sticky;top:0;background:#00426F;color:#fff;padding:10px 16px;display:flex;gap:14px;align-items:center;border-radius:0 0 10px 10px;margin-bottom:14px;font-size:12.5px}
+    .printbalk button{background:#F39200;color:#fff;border:none;border-radius:7px;padding:9px 20px;font-size:13px;font-weight:700;cursor:pointer}
+    @media print{.printbalk{display:none}}</style>`;
 }
 const PRINT_DIS = `<p class="dis">Indicatief overzicht op basis van zelf ingevoerde gegevens. Geen belastingaangifte, geen financieel of fiscaal advies en geen erfrechtelijke duiding. Maandlasten, rentebedragen, verwachte eindwaardes en projecties zijn indicatieve rekenuitkomsten. Het schenkingsregister is een eigen registratie, geen aangifte schenkbelasting. FINdossier.nl</p>`;
 function openPrint(titel, inhoud, liggend){
+  inhoud = inhoud.replace(/<h1>/, '<h1><span class="merk">FINdossier.nl — persoonlijk financieel dossier</span>');
+  const datumRegel = `<p style="color:#5C6B76;font-size:10px;margin:2px 0 12px 4px">Afgedrukt op ${toonDatum(new Date().toISOString().slice(0,10))}${instellingen.kantoor?" — aangeboden door "+escapeHtml(instellingen.kantoor):""}</p>`;
+  inhoud = inhoud.replace(/<\/h1>/, '</h1>' + datumRegel);
+  const balk = `<div class="printbalk"><button onclick="window.print()">Afdrukken / opslaan als PDF</button><span>Het dossier is geopend in een nieuw tabblad — controleer het rustig en druk daarna af.</span></div>`;
   const html = `<!DOCTYPE html><html lang="nl"><head><meta charset="utf-8"><title>${titel}</title>${printStijl(liggend)}</head><body>` +
-    inhoud + PRINT_DIS + `<script>window.onload=function(){window.print();}<\/script></body></html>`;
+    balk + inhoud + PRINT_DIS + `</body></html>`;
   const w = window.open("", "_blank");
-  if(!w){ alert("Sta pop-ups toe om te kunnen afdrukken."); return; }
+  if(!w){ alert("Sta pop-ups toe om het dossier in een nieuw tabblad te openen."); return; }
   w.document.write(html); w.document.close();
 }
 function printKop(){
@@ -4027,16 +4047,7 @@ function printAdviseursRapport(){
   const u = uitgavenDetail(j);
   const ink = cashInkomen(j);
   const adviseur = contacten.find(c=>c.rol==="Financieel adviseur");
-  const st = `<style>@page{size:A4;margin:16mm}
-    body{font-family:Segoe UI,Arial,sans-serif;color:#1E2A33;padding:10px;font-size:12px}
-    h1{color:#005C9E;font-size:19px}h2{color:#005C9E;font-size:13px;margin:18px 0 6px;text-transform:uppercase;letter-spacing:.5px}
-    table{border-collapse:collapse;width:100%;font-size:11px;margin-bottom:6px}
-    th,td{border-bottom:1px solid #D9E0E6;padding:4px 6px;text-align:left;vertical-align:top}
-    th{background:#E8F1F8;color:#00426F}td.r,th.r{text-align:right}
-    tr.tot td{font-weight:700;background:#E8F1F8}
-    td.neg{color:#C0392B}
-    p.dis{font-size:10px;color:#5C6B76;margin-top:16px;line-height:1.5}
-    ul{margin:4px 0 8px 18px}li{margin-bottom:3px}</style>`;
+  const st = printStijl(false) + `<style>ul{margin:4px 0 8px 18px}li{margin-bottom:4px}tr.tot td{font-weight:700;background:#E8F1F8 !important}</style>`;
 
   const jaren = Object.keys(data).sort();
   let mj = `<h2>Meerjarenoverzicht</h2><table><tr><th>Onderdeel</th>` + jaren.map(x=>`<th class="r">${x}</th>`).join("") + "</tr>";
@@ -4098,7 +4109,9 @@ function printAdviseursRapport(){
     `<p style="font-size:10.5px;color:#5C6B76">Deze punten zijn automatisch samengesteld uit de eigen registratie van de cliënt en vormen geen advies of beoordeling.</p>`;
 
   const html = `<!DOCTYPE html><html lang="nl"><head><meta charset="utf-8"><title>FINdossier adviseursrapport ${j}</title>${st}</head><body>
-    <h1>FINdossier adviseursrapport — ${escapeHtml(naam("p1"))}${data[j].namen.p2?" en "+escapeHtml(naam("p2")):""}</h1>
+    <div class="printbalk"><button onclick="window.print()">Afdrukken / opslaan als PDF</button><span>Het rapport is geopend in een nieuw tabblad — controleer het rustig en druk daarna af.</span></div>
+    <h1><span class="merk">FINdossier.nl — adviseursrapport</span>${escapeHtml(naam("p1"))}${data[j].namen.p2?" en "+escapeHtml(naam("p2")):""}</h1>
+    <p style="color:#5C6B76;font-size:10px;margin:2px 0 12px 4px">Opgesteld op ${toonDatum(new Date().toISOString().slice(0,10))}</p>
     <p>Peiljaar ${j}${data[j].peildatum?" — peildatum "+toonDatum(data[j].peildatum):""}. Opgesteld met eigen registratie van de cliënt.${instellingen.kantoor?" Aangeboden door "+escapeHtml(instellingen.kantoor)+".":""}</p>
     ${adviseur?`<p>Ter bespreking met: <strong>${escapeHtml(adviseur.naam)}</strong>${adviseur.organisatie?", "+escapeHtml(adviseur.organisatie):""}${adviseur.telefoon?" — ☎ "+escapeHtml(adviseur.telefoon):""}${adviseur.email?" — "+escapeHtml(adviseur.email):""}</p>`:""}
     <h2>Kerncijfers ${j}</h2><table>
@@ -4114,9 +4127,9 @@ function printAdviseursRapport(){
     </div>
     ${mj}${cf}${aannames}${doelen}${rente}${overlijden}${agendaBlok}
     <p class="dis">Dit rapport is opgesteld op basis van door de cliënt zelf ingevoerde gegevens en zelfgekozen aannames. Alle projecties, scenario's en vergelijkingen zijn indicatieve rekenuitkomsten — geen prognose, geen financieel of fiscaal advies en geen aanbeveling voor enig financieel product. Werkelijke uitkomsten wijken af. Aan dit rapport kunnen geen rechten worden ontleend.</p>
-    <script>window.onload=function(){window.print();}<\/script></body></html>`;
+    </body></html>`;
   const w = window.open("", "_blank");
-  if(!w){ alert("Sta pop-ups toe om te kunnen afdrukken."); return; }
+  if(!w){ alert("Sta pop-ups toe om het rapport in een nieuw tabblad te openen."); return; }
   w.document.write(html); w.document.close();
 }
 
