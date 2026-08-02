@@ -165,8 +165,8 @@
 <div class="wrap">
 
   <div class="melding">
-    <strong>Let op:</strong> gegevens worden standaard niet automatisch opgeslagen en nooit verstuurd. Gebruik <em>Exporteren</em> om alles als bestand te bewaren (met optioneel wachtwoord) en <em>Importeren</em> om het later weer in te laden. Bewaar het exportbestand veilig: het bevat uw complete financiële gegevens.
-    <span class="autosave-regel"><input type="checkbox" id="autosave-toggle" onchange="zetAutoOpslaan(this.checked)"><label for="autosave-toggle"><strong>Bewaar automatisch in deze browser</strong> — onversleuteld, alleen op dit apparaat; exporteren blijft uw echte back-up.</label> <em id="autosave-status"></em></span>
+    <strong>Let op:</strong> gegevens worden standaard niet automatisch opgeslagen en nooit verstuurd. Gebruik <em>Opslaan</em> om alles als bestand te bewaren (met optioneel wachtwoord) en <em>Uploaden</em> om het later weer in te laden. Bewaar het exportbestand veilig: het bevat uw complete financiële gegevens.
+    <span class="autosave-regel"><input type="checkbox" id="autosave-toggle" onchange="zetAutoOpslaan(this.checked)"><label for="autosave-toggle"><strong>Bewaar automatisch in deze browser</strong> — onversleuteld, alleen op dit apparaat; opslaan als bestand blijft uw echte back-up.</label> <em id="autosave-status"></em></span>
   </div>
 
   <div class="dossierbalk">
@@ -197,9 +197,9 @@
     <div class="jaartabs" id="jaartabs" role="tablist" aria-label="Belastingjaren"></div>
     <button class="btn btn-primair" onclick="nieuwJaar()">+ Jaar toevoegen</button>
     <button class="btn btn-gevaar" onclick="verwijderJaar()">Jaar verwijderen</button>
-    <button class="btn btn-secundair" onclick="exporteer()">Exporteren</button>
+    <button class="btn btn-secundair" onclick="exporteer()">Opslaan</button>
     <button class="btn btn-secundair" onclick="exporteerCsv()">CSV</button>
-    <button class="btn btn-secundair" onclick="document.getElementById('importfile').click()">Importeren</button>
+    <button class="btn btn-secundair" onclick="document.getElementById('importfile').click()">Uploaden</button>
     <input type="file" id="importfile" accept="application/json" hidden onchange="importeer(this)">
     <button class="btn btn-secundair" onclick="printTab('vermogen')">Tabblad afdrukken</button>
     <button class="btn btn-secundair" onclick="printOverzicht()">Alles afdrukken</button>
@@ -349,7 +349,7 @@
 
     <div class="toolbar">
       <div style="flex:1"></div>
-      <button class="btn btn-secundair" onclick="exporteer()">Exporteren</button>
+      <button class="btn btn-secundair" onclick="exporteer()">Opslaan</button>
       <button class="btn btn-secundair" onclick="exporteerCsv()">CSV</button>
       <button class="btn btn-secundair" onclick="printTab('familie')">Tabblad afdrukken</button>
       <button class="btn btn-secundair" onclick="printOverzicht()">Alles afdrukken</button>
@@ -422,7 +422,7 @@
 
     <div class="toolbar">
       <div style="flex:1"></div>
-      <button class="btn btn-secundair" onclick="exporteer()">Exporteren</button>
+      <button class="btn btn-secundair" onclick="exporteer()">Opslaan</button>
       <button class="btn btn-secundair" onclick="exporteerCsv()">CSV</button>
       <button class="btn btn-secundair" onclick="printTab('verzekeringen')">Tabblad afdrukken</button>
       <button class="btn btn-secundair" onclick="printOverzicht()">Alles afdrukken</button>
@@ -447,7 +447,7 @@
 
     <div class="toolbar">
       <div style="flex:1"></div>
-      <button class="btn btn-secundair" onclick="exporteer()">Exporteren</button>
+      <button class="btn btn-secundair" onclick="exporteer()">Opslaan</button>
       <button class="btn btn-secundair" onclick="exporteerCsv()">CSV</button>
       <button class="btn btn-secundair" onclick="printTab('contacten')">Tabblad afdrukken</button>
       <button class="btn btn-secundair" onclick="printOverzicht()">Alles afdrukken</button>
@@ -476,7 +476,7 @@
 
     <div class="toolbar">
       <div style="flex:1"></div>
-      <button class="btn btn-secundair" onclick="exporteer()">Exporteren</button>
+      <button class="btn btn-secundair" onclick="exporteer()">Opslaan</button>
       <button class="btn btn-secundair" onclick="exporteerCsv()">CSV</button>
       <button class="btn btn-secundair" onclick="printTab('nalatenschap')">Tabblad afdrukken</button>
       <button class="btn btn-secundair" onclick="printOverzicht()">Alles afdrukken</button>
@@ -541,7 +541,7 @@
 
     <div class="toolbar">
       <div style="flex:1"></div>
-      <button class="btn btn-secundair" onclick="exporteer()">Exporteren</button>
+      <button class="btn btn-secundair" onclick="exporteer()">Opslaan</button>
       <button class="btn btn-secundair" onclick="exporteerCsv()">CSV</button>
       <button class="btn btn-secundair" onclick="printTab('wensen')">Tabblad afdrukken</button>
       <button class="btn btn-secundair" onclick="printOverzicht()">Alles afdrukken</button>
@@ -574,7 +574,7 @@
     <div class="toolbar">
       <div style="flex:1"></div>
       <button class="btn btn-primair" onclick="printAdviseursRapport()">Adviseursrapport afdrukken</button>
-      <button class="btn btn-secundair" onclick="exporteer()">Exporteren</button>
+      <button class="btn btn-secundair" onclick="exporteer()">Opslaan</button>
       <button class="btn btn-secundair" onclick="printOverzicht()">Alles afdrukken</button>
     </div>
 
@@ -637,7 +637,7 @@
   <div id="view-aantekeningen" hidden>
     <div class="toolbar">
       <div style="flex:1"></div>
-      <button class="btn btn-secundair" onclick="exporteer()">Exporteren</button>
+      <button class="btn btn-secundair" onclick="exporteer()">Opslaan</button>
       <button class="btn btn-secundair" onclick="printTab('aantekeningen')">Tabblad afdrukken</button>
       <button class="btn btn-secundair" onclick="printOverzicht()">Alles afdrukken</button>
     </div>
@@ -663,17 +663,17 @@
       <p style="font-size:14px;margin-bottom:6px"><strong>1.</strong> Vul de personen in: namen, geboortedatums en de peildatum. De AOW-datum wordt automatisch berekend.</p>
       <p style="font-size:14px;margin-bottom:6px"><strong>2.</strong> Pak je belastingaangifte erbij en vul op Vermogen &amp; inkomen alle rekeningen, woningen, hypotheken en overige posten in.</p>
       <p style="font-size:14px;margin-bottom:6px"><strong>3.</strong> Loop de andere tabbladen langs: verzekeringen, contactpersonen, nalatenschap en wensen.</p>
-      <p style="font-size:14px;margin-bottom:6px"><strong>4.</strong> Klik op Exporteren, kies een wachtwoord en bewaar het bestand veilig. Leg in het Nalatenschapsdossier vast wáár het staat.</p>
-      <p style="font-size:14px;margin-bottom:0"><strong>5.</strong> Werk jaarlijks bij: importeer het bestand, voeg een nieuw jaar toe (neemt alles over), actualiseer de standen en exporteer opnieuw.</p>
+      <p style="font-size:14px;margin-bottom:6px"><strong>4.</strong> Klik op Opslaan, kies een wachtwoord en bewaar het bestand veilig. Leg in het Nalatenschapsdossier vast wáár het staat.</p>
+      <p style="font-size:14px;margin-bottom:0"><strong>5.</strong> Werk jaarlijks bij: upload het bestand, voeg een nieuw jaar toe (neemt alles over), actualiseer de standen en sla opnieuw op.</p>
     </section>
 
     <section class="kaart">
       <h2>Opslaan en beveiligen</h2>
-      <div class="sub" style="margin-bottom:8px"><strong>De belangrijkste regel:</strong> FINdossier slaat niets automatisch op. Exporteer na elke sessie.</div>
-      <p style="font-size:14px;margin-bottom:6px"><strong>Exporteren</strong> bewaart alles als één bestand. Met een wachtwoord wordt het versleuteld (AES-256) — zonder dat wachtwoord is het door niemand te openen, bewaar het dus op een vindbare plek.</p>
-      <p style="font-size:14px;margin-bottom:6px"><strong>Importeren</strong> laadt een eerder geëxporteerd bestand weer in.</p>
+      <div class="sub" style="margin-bottom:8px"><strong>De belangrijkste regel:</strong> FINdossier slaat niets automatisch op. Sla na elke sessie op als bestand.</div>
+      <p style="font-size:14px;margin-bottom:6px"><strong>Opslaan</strong> bewaart alles als één bestand. Met een wachtwoord wordt het versleuteld (AES-256) — zonder dat wachtwoord is het door niemand te openen, bewaar het dus op een vindbare plek.</p>
+      <p style="font-size:14px;margin-bottom:6px"><strong>Uploaden</strong> laadt een eerder opgeslagen bestand weer in.</p>
       <p style="font-size:14px;margin-bottom:6px"><strong>CSV</strong> maakt een uitdraai voor Excel (niet versleuteld, niet importeerbaar). <strong>Afdrukken</strong> kan per tabblad of van alles tegelijk — inclusief grafieken ("In één oogopslag") en het familieschema. Kies in het printvenster "Opslaan als PDF" om een digitale kopie te bewaren.</p>
-      <p style="font-size:14px;margin-bottom:6px"><strong>Automatisch bewaren (opt-in):</strong> via het vinkje bovenaan bewaart de tool alles automatisch in deze browser — handig, maar onversleuteld en alleen op dit apparaat. Op een gedeelde of openbare computer: uit laten staan. Exporteren blijft altijd uw echte back-up.</p>
+      <p style="font-size:14px;margin-bottom:6px"><strong>Automatisch bewaren (opt-in):</strong> via het vinkje bovenaan bewaart de tool alles automatisch in deze browser — handig, maar onversleuteld en alleen op dit apparaat. Op een gedeelde of openbare computer: uit laten staan. Opslaan als bestand blijft altijd uw echte back-up.</p>
       <p style="font-size:14px;margin-bottom:0"><strong>Meerdere dossiers:</strong> via de dossierbalk bovenaan beheert u meerdere dossiers naast elkaar (bijv. uw eigen dossier en dat van een ouder). "Voorbeeld laden" opent een volledig fictief demodossier om de tool te verkennen.</p>
     </section>
 
@@ -3717,7 +3717,7 @@ async function importeer(input){
       if(!obj.data && !Object.keys(obj).some(k=>/^\d{4}$/.test(k))) throw new Error("leeg");
       if(!obj.data){ obj = {data:obj}; } // heel oude exports: jaren op topniveau
       const b = saneerBundel(obj);
-      const alsNieuw = confirm("Wilt u dit bestand als NIEUW dossier importeren?\n\nOK = nieuw dossier ernaast\nAnnuleren = het huidige dossier overschrijven");
+      const alsNieuw = confirm("Wilt u dit bestand als NIEUW dossier uploaden?\n\nOK = nieuw dossier ernaast\nAnnuleren = het huidige dossier overschrijven");
       if(alsNieuw){
         nieuwDossier(String(obj.dossierNaam||f.name.replace(/\.json$/i,""))||"Geïmporteerd dossier", b);
       } else {
@@ -3726,7 +3726,7 @@ async function importeer(input){
       }
       dirty = false;
       planOpslaan();
-    }catch(e){ alert("Dit bestand kan niet worden gelezen. Kies een eerder geëxporteerd bestand van deze tool."); }
+    }catch(e){ alert("Dit bestand kan niet worden gelezen. Kies een eerder opgeslagen bestand van deze tool."); }
     input.value = "";
   };
   r.readAsText(f);
