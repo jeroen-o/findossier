@@ -511,9 +511,30 @@
 
     <section class="kaart">
       <h2>Digitale nalatenschap</h2>
-      <div class="sub">Waar vindt uw partner de toegang tot uw digitale leven: wachtwoordmanager, e-mail, DigiD, telefoon, crypto-wallets, cloud en social media. Alleen vindplaatsen — nooit de wachtwoorden of seed phrases zelf.</div>
+      <div class="sub">Waar vindt uw partner de toegang tot uw digitale leven: wachtwoordmanager, DigiD, crypto-wallets, cloud-opslag en bankieren-apps. Telefoons, e-mailaccounts en social media hebben hieronder een eigen onderdeel. Alleen vindplaatsen — nooit de wachtwoorden of seed phrases zelf.</div>
       <div class="tabelscroll"><div id="digitaaltabel"></div></div>
       <button class="btn-klein" onclick="voegDigitaalToe()">+ Account / toegang toevoegen</button>
+    </section>
+
+    <section class="kaart">
+      <h2>Mobiele telefoons</h2>
+      <div class="sub">Hoe opent uw partner het toestel? De telefoon is vaak de sleutel tot alles (sms-codes, authenticator, e-mail). Beschrijf per toestel wáár de toegangscode te vinden is — nooit de pincode of het patroon zelf.</div>
+      <div class="tabelscroll"><div id="telefoontabel"></div></div>
+      <button class="btn-klein" onclick="voegTelefoonToe()">+ Telefoon toevoegen</button>
+    </section>
+
+    <section class="kaart">
+      <h2>E-mailaccounts</h2>
+      <div class="sub">E-mail is de toegangspoort tot vrijwel alle andere accounts (wachtwoord-herstel). Leg per e-mailadres vast waar de toegang te vinden is en wat ermee moet gebeuren.</div>
+      <div class="tabelscroll"><div id="emailtabel"></div></div>
+      <button class="btn-klein" onclick="voegEmailToe()">+ E-mailaccount toevoegen</button>
+    </section>
+
+    <section class="kaart">
+      <h2>Social media</h2>
+      <div class="sub">Per profiel: het platform, de gebruikersnaam en wat ermee moet gebeuren — verwijderen, herdenkingsstatus (kan o.a. bij Facebook en Instagram) of behouden. Vindplaats van de toegang, nooit het wachtwoord zelf.</div>
+      <div class="tabelscroll"><div id="socialtabel"></div></div>
+      <button class="btn-klein" onclick="voegSocialToe()">+ Account toevoegen</button>
     </section>
 
     <section class="kaart">
@@ -683,7 +704,7 @@
       <p style="font-size:14px;margin-bottom:6px"><strong>Familie &amp; schenkingen</strong> — registreer uw samenlevingsvorm (huwelijk, geregistreerd partnerschap, samenlevingscontract of samenwonend) met datum en vermogensregime, en bouw de familieboom: kinderen gezamenlijk of van één partner, kleinkinderen gekoppeld aan het juiste kind. Het schema tekent de lijnen automatisch, met de relatievorm op de partnerlijn. Plus het schenkingsregister met totalen per ontvanger en jaar (eigen registratie, geen aangifte schenkbelasting).</p>
       <p style="font-size:14px;margin-bottom:6px"><strong>Overige verzekeringen</strong> — alle polissen met polisnummer, dekking, premie en vervaldatum, plus een premie-overzicht per soort.</p>
       <p style="font-size:14px;margin-bottom:6px"><strong>Belangrijke personen</strong> — adviseur, notaris, huisarts, executeur en meer, met NAWTE-gegevens en een nood-markering voor het blok "Wie bellen in nood". Familieleden voegt u met één klik toe vanuit de familieboom — ook zij kunnen noodcontact zijn.</p>
-      <p style="font-size:14px;margin-bottom:6px"><strong>Nalatenschapsdossier</strong> — eerste stappen voor nabestaanden (automatisch samengesteld), toegang tot dit dossier, documentenregister, digitale nalatenschap, uitvaartwensen en abonnementen. Gouden regel: nooit wachtwoorden of seed phrases noteren — alleen vindplaatsen.</p>
+      <p style="font-size:14px;margin-bottom:6px"><strong>Nalatenschapsdossier</strong> — eerste stappen voor nabestaanden (automatisch samengesteld), toegang tot dit dossier, documentenregister, digitale nalatenschap, mobiele telefoons, e-mailaccounts, social media, uitvaartwensen en abonnementen. Gouden regel: nooit wachtwoorden, pincodes of seed phrases noteren — alleen vindplaatsen.</p>
       <p style="font-size:14px;margin-bottom:6px"><strong>Wensen &amp; doelen</strong> — doelen met streefjaar, benodigd en gereserveerd bedrag, voortgang en een tijdlijn met de AOW-datums als referentie, plus vrije ruimte "In uw eigen woorden" voor context en motivatie. Het losse tabblad <strong>Aantekeningen</strong> is uw logboek: gesprekken, besluiten en actiepunten met datum en onderwerp.</p>
       <p style="font-size:14px;margin-bottom:0"><strong>Kompas</strong> — uitgaven en cashflow, vermogensprojectie met eigen aannames, koers-dashboard per doel, scenario's (rendement, inleg stopt, renteopslag, overlijden) en het adviseursrapport met grafieken (bezitsverdeling, vermogensontwikkeling, cashflow). Herijk jaarlijks na de aangifte. Alles is indicatief — geen advies.</p>
     </section>
@@ -712,6 +733,7 @@
     <section class="kaart">
       <h2>Versie</h2>
       <p style="font-size:14px;margin-bottom:6px">U gebruikt versie <strong id="versie-label"></strong>.</p>
+      <p style="font-size:14px;margin-bottom:6px"><strong>1.3.0</strong> — digitale nalatenschap uitgebreid: eigen onderdelen voor mobiele telefoons (hoe het toestel te openen is — als vindplaats van de code), e-mailaccounts en social media, elk met een "bij overlijden"-actie (opzeggen, doorsturen, herdenkingsstatus, verwijderen). Opgenomen in de eerste stappen voor nabestaanden, de prints en de CSV.</p>
       <p style="font-size:14px;margin-bottom:6px"><strong>1.2.0</strong> — nieuwe familieboom: relatie &amp; samenlevingsvorm (huwelijk, geregistreerd partnerschap, samenlevingscontract, samenwonend) met datum en vermogensregime op de partnerlijn, kleinkinderen en achterkleinkinderen gekoppeld aan het juiste kind met echte ouder-kindlijnen, vernieuwd schema-ontwerp en herbouwde bewerktabel. Daarnaast: cirkeldiagram van de bezitsverdeling in de tool, grafieken in alle prints en het adviseursrapport ("In één oogopslag"), en het familieschema in de afdrukken.</p>
       <p style="font-size:14px;margin-bottom:6px"><strong>1.1.0</strong> — automatisch bewaren in de browser (opt-in), meerdere dossiers, voorbeelddossier, ongedaan maken bij verwijderen, invoercontroles, partnerpensioen in het overlijdensscenario, inflatie in projectie en doelentoets, valuta-omrekenkolom, testament-typelabel, white-label voor adviseurs.</p>
       <p style="font-size:14px;margin-bottom:0"><strong>1.0.0</strong> — eerste versie: vermogen &amp; inkomen per jaar, familie &amp; schenkingen, verzekeringen, belangrijke personen, nalatenschapsdossier, wensen &amp; doelen, Kompas, versleutelde export en prints.</p>
@@ -1262,6 +1284,21 @@ document.addEventListener("input", e=>{
     if(d){ d[ds.k] = el.value; markeerGewijzigd(); }
     return;
   }
+  if(ds.tel){
+    const t = nalatenschap.telefoons.find(x=>x.id===ds.tel);
+    if(t){ t[ds.k] = el.value; markeerGewijzigd(); }
+    return;
+  }
+  if(ds.eml){
+    const e = nalatenschap.emails.find(x=>x.id===ds.eml);
+    if(e){ e[ds.k] = el.value; markeerGewijzigd(); }
+    return;
+  }
+  if(ds.soc){
+    const s = nalatenschap.social.find(x=>x.id===ds.soc);
+    if(s){ s[ds.k] = el.value; markeerGewijzigd(); }
+    return;
+  }
   if(ds.abo){
     const a = nalatenschap.abonnementen.find(x=>x.id===ds.abo);
     if(a){ a[ds.k] = (ds.t==="euro") ? parseNL(el.value) : el.value; markeerGewijzigd(); }
@@ -1535,7 +1572,7 @@ function renderContactenAlles(){
 /* =================== Nalatenschapsdossier =================== */
 let nalatenschap = {
   toegang:{bestand:"", wachtwoord:"", wieWeet:""},
-  documenten:[], digitaal:[], abonnementen:[],
+  documenten:[], digitaal:[], telefoons:[], emails:[], social:[], abonnementen:[],
   uitvaart:{p1:{vorm:"", ondernemer:"", donor:"", wensen:""}, p2:{vorm:"", ondernemer:"", donor:"", wensen:""}}
 };
 const DOC_SOORTEN = ["Testament","Levenstestament / volmacht","Huwelijkse voorwaarden","Samenlevingscontract","Codicil","Trouwboekje","Eigendomsakte woning","Hypotheekakte","Schenkingsakte","Verklaring van erfrecht","Overig"];
@@ -1543,9 +1580,15 @@ const DIG_SOORTEN = ["Wachtwoordmanager","E-mail","DigiD","Telefoon / pincode","
 const UITVAART_VORMEN = ["Begraven","Cremeren","Ter beschikking stellen wetenschap","Geen voorkeur","Anders"];
 const DONOR_OPTIES = ["Geregistreerd: donor","Geregistreerd: geen donor","Geregistreerd: nabestaanden beslissen","Niet geregistreerd","Onbekend"];
 const ABO_ACTIES = ["Opzeggen","Overzetten op partner","Behouden","Nader bekijken"];
+const EMAIL_ACTIES = ["Opzeggen / sluiten","Tijdelijk behouden","Doorsturen instellen","Overzetten op partner","Nader bekijken"];
+const SOCIAL_PLATFORMS = ["Facebook","Instagram","LinkedIn","X (Twitter)","TikTok","YouTube","WhatsApp","Snapchat","Pinterest","Strava","Marktplaats","Overig"];
+const SOCIAL_ACTIES = ["Verwijderen","Herdenkingsstatus","Behouden","Nader bekijken"];
 
 function leegDocument(){ return {id:uid(), soort:"", typeLabel:"", vanWie:"samen", datum:"", vindplaats:"", bewaarder:"", notitie:""}; }
 function leegDigitaal(){ return {id:uid(), soort:"", oms:"", vindplaats:"", vanWie:"samen", notitie:""}; }
+function leegTelefoon(){ return {id:uid(), toestel:"", vanWie:"samen", toegang:"", simpin:"", notitie:""}; }
+function leegEmail(){ return {id:uid(), adres:"", provider:"", vanWie:"samen", vindplaats:"", actie:"", notitie:""}; }
+function leegSocial(){ return {id:uid(), platform:"", profiel:"", vanWie:"samen", vindplaats:"", actie:"", notitie:""}; }
 function leegAbonnement(){ return {id:uid(), oms:"", aanbieder:"", contractnr:"", email:"", kosten:0, actie:"", vanWie:"samen", notitie:""}; }
 
 function voegDocumentToe(){ nalatenschap.documenten.push(leegDocument()); markeerGewijzigd(); renderNalatenschapAlles(); }
@@ -1561,6 +1604,27 @@ function verwijderDigitaal(id){
   const [d] = nalatenschap.digitaal.splice(idx,1);
   markeerGewijzigd(); renderNalatenschapAlles();
   toonUndo("Digitale toegang verwijderd.", ()=>{ nalatenschap.digitaal.splice(idx,0,d); renderNalatenschapAlles(); });
+}
+function voegTelefoonToe(){ nalatenschap.telefoons.push(leegTelefoon()); markeerGewijzigd(); renderNalatenschapAlles(); }
+function verwijderTelefoon(id){
+  const idx = nalatenschap.telefoons.findIndex(d=>d.id===id);
+  const [t] = nalatenschap.telefoons.splice(idx,1);
+  markeerGewijzigd(); renderNalatenschapAlles();
+  toonUndo("Telefoon verwijderd.", ()=>{ nalatenschap.telefoons.splice(idx,0,t); renderNalatenschapAlles(); });
+}
+function voegEmailToe(){ nalatenschap.emails.push(leegEmail()); markeerGewijzigd(); renderNalatenschapAlles(); }
+function verwijderEmail(id){
+  const idx = nalatenschap.emails.findIndex(d=>d.id===id);
+  const [e] = nalatenschap.emails.splice(idx,1);
+  markeerGewijzigd(); renderNalatenschapAlles();
+  toonUndo("E-mailaccount verwijderd.", ()=>{ nalatenschap.emails.splice(idx,0,e); renderNalatenschapAlles(); });
+}
+function voegSocialToe(){ nalatenschap.social.push(leegSocial()); markeerGewijzigd(); renderNalatenschapAlles(); }
+function verwijderSocial(id){
+  const idx = nalatenschap.social.findIndex(d=>d.id===id);
+  const [s] = nalatenschap.social.splice(idx,1);
+  markeerGewijzigd(); renderNalatenschapAlles();
+  toonUndo("Social-media-account verwijderd.", ()=>{ nalatenschap.social.splice(idx,0,s); renderNalatenschapAlles(); });
 }
 function voegAbonnementToe(){ nalatenschap.abonnementen.push(leegAbonnement()); markeerGewijzigd(); renderNalatenschapAlles(); }
 function verwijderAbonnement(id){
@@ -1610,6 +1674,65 @@ function renderDigitaal(){
       <td>${vanWieSelect("dig", d.id, d.vanWie)}</td>
       <td><input value="${escapeHtml(d.notitie)}" data-dig="${d.id}" data-k="notitie"></td>
       <td><button class="verwijder" title="Verwijderen" aria-label="Toegang verwijderen" onclick="verwijderDigitaal('${d.id}')">✕</button></td>
+    </tr>`;
+  });
+  html += "</tbody></table>";
+  host.innerHTML = html;
+}
+
+function renderTelefoons(){
+  const host = document.getElementById("telefoontabel");
+  if(!nalatenschap.telefoons.length){ host.innerHTML = '<div class="leeg">Nog geen telefoons vastgelegd.</div>'; return; }
+  let html = `<table class="lijst"><thead><tr><th>Toestel</th><th>Van wie</th><th>Hoe is het toestel te openen? (vindplaats code)</th><th>Sim-pincode (vindplaats)</th><th>Notitie</th><th></th></tr></thead><tbody>`;
+  nalatenschap.telefoons.forEach(t=>{
+    html += `<tr>
+      <td><input value="${escapeHtml(t.toestel)}" placeholder="Bijv. iPhone 15, Samsung S24" data-tel="${t.id}" data-k="toestel"></td>
+      <td>${vanWieSelect("tel", t.id, t.vanWie)}</td>
+      <td><input value="${escapeHtml(t.toegang)}" placeholder="VINDPLAATS, geen code — bijv. 'envelop in de kluis'" data-tel="${t.id}" data-k="toegang"></td>
+      <td><input value="${escapeHtml(t.simpin)}" placeholder="Bijv. 'zelfde envelop', 'bij provider op te vragen'" data-tel="${t.id}" data-k="simpin"></td>
+      <td><input value="${escapeHtml(t.notitie)}" data-tel="${t.id}" data-k="notitie"></td>
+      <td><button class="verwijder" title="Verwijderen" aria-label="Telefoon verwijderen" onclick="verwijderTelefoon('${t.id}')">✕</button></td>
+    </tr>`;
+  });
+  html += "</tbody></table>";
+  host.innerHTML = html;
+}
+
+function renderEmails(){
+  const host = document.getElementById("emailtabel");
+  if(!nalatenschap.emails.length){ host.innerHTML = '<div class="leeg">Nog geen e-mailaccounts vastgelegd.</div>'; return; }
+  let html = `<table class="lijst"><thead><tr><th>E-mailadres</th><th>Provider</th><th>Van wie</th><th>Waar vindt uw partner de toegang?</th><th>Bij overlijden</th><th>Notitie</th><th></th></tr></thead><tbody>`;
+  nalatenschap.emails.forEach(e=>{
+    const acties = EMAIL_ACTIES.map(o=>`<option${e.actie===o?" selected":""}>${o}</option>`).join("");
+    html += `<tr>
+      <td><input type="email" value="${escapeHtml(e.adres)}" placeholder="naam@voorbeeld.nl" data-eml="${e.id}" data-k="adres"></td>
+      <td><input value="${escapeHtml(e.provider)}" placeholder="Bijv. Gmail, Outlook, KPN" data-eml="${e.id}" data-k="provider"></td>
+      <td>${vanWieSelect("eml", e.id, e.vanWie)}</td>
+      <td><input value="${escapeHtml(e.vindplaats)}" placeholder="VINDPLAATS, geen wachtwoord — bijv. 'in wachtwoordmanager'" data-eml="${e.id}" data-k="vindplaats"></td>
+      <td><select data-eml="${e.id}" data-k="actie"><option value=""></option>${acties}</select></td>
+      <td><input value="${escapeHtml(e.notitie)}" data-eml="${e.id}" data-k="notitie"></td>
+      <td><button class="verwijder" title="Verwijderen" aria-label="E-mailaccount verwijderen" onclick="verwijderEmail('${e.id}')">✕</button></td>
+    </tr>`;
+  });
+  html += "</tbody></table>";
+  host.innerHTML = html;
+}
+
+function renderSocial(){
+  const host = document.getElementById("socialtabel");
+  if(!nalatenschap.social.length){ host.innerHTML = '<div class="leeg">Nog geen social-media-accounts vastgelegd.</div>'; return; }
+  let html = `<table class="lijst"><thead><tr><th>Platform</th><th>Gebruikersnaam / profiel</th><th>Van wie</th><th>Waar vindt uw partner de toegang?</th><th>Bij overlijden</th><th>Notitie</th><th></th></tr></thead><tbody>`;
+  nalatenschap.social.forEach(s=>{
+    const platforms = SOCIAL_PLATFORMS.map(o=>`<option${s.platform===o?" selected":""}>${o}</option>`).join("");
+    const acties = SOCIAL_ACTIES.map(o=>`<option${s.actie===o?" selected":""}>${o}</option>`).join("");
+    html += `<tr>
+      <td><select data-soc="${s.id}" data-k="platform"><option value=""></option>${platforms}</select></td>
+      <td><input value="${escapeHtml(s.profiel)}" placeholder="Bijv. @gebruikersnaam of profielnaam" data-soc="${s.id}" data-k="profiel"></td>
+      <td>${vanWieSelect("soc", s.id, s.vanWie)}</td>
+      <td><input value="${escapeHtml(s.vindplaats)}" placeholder="VINDPLAATS, geen wachtwoord — bijv. 'in wachtwoordmanager'" data-soc="${s.id}" data-k="vindplaats"></td>
+      <td><select data-soc="${s.id}" data-k="actie"><option value=""></option>${acties}</select></td>
+      <td><input value="${escapeHtml(s.notitie)}" data-soc="${s.id}" data-k="notitie"></td>
+      <td><button class="verwijder" title="Verwijderen" aria-label="Social-media-account verwijderen" onclick="verwijderSocial('${s.id}')">✕</button></td>
     </tr>`;
   });
   html += "</tbody></table>";
@@ -1674,6 +1797,14 @@ function renderEersteStappen(){
     ["Informeer de executeur testamentair", contactRegel(executeur)],
     ["Informeer de werkgever(s)", werkgevers.length ? werkgevers.map(escapeHtml).join(", ") : '<em>geen werkgevers vastgelegd</em>'],
     ["Informeer banken en verzekeraars", "Alle rekeningen en polissen staan met nummers in de tabbladen Vermogen &amp; inkomen en Overige verzekeringen."],
+    ["Regel de digitale nalatenschap: telefoon, e-mail en social media", (()=>{
+      const delen = [];
+      if(nalatenschap.telefoons.length) delen.push(nalatenschap.telefoons.length + " telefoon(s)");
+      if(nalatenschap.emails.length) delen.push(nalatenschap.emails.length + " e-mailaccount(s)");
+      if(nalatenschap.social.length) delen.push(nalatenschap.social.length + " social-media-account(s)");
+      if(nalatenschap.digitaal.length) delen.push(nalatenschap.digitaal.length + " overige toegang(en)");
+      return delen.length ? delen.join(", ") + " geregistreerd in de lijsten hieronder. Begin met de telefoon en e-mail — die zijn de sleutel tot de rest." : '<em>nog geen digitale accounts vastgelegd</em>';
+    })()],
     ["Zeg abonnementen op of zet ze over", nalatenschap.abonnementen.length ? nalatenschap.abonnementen.length + " abonnement(en) geregistreerd in de lijst hieronder" : '<em>nog geen abonnementen vastgelegd</em>']
   ];
   host.innerHTML = stappen.map(([titel, detail], i)=>
@@ -1690,6 +1821,9 @@ function renderNalatenschapAlles(){
   renderEersteStappen();
   renderDocumenten();
   renderDigitaal();
+  renderTelefoons();
+  renderEmails();
+  renderSocial();
   renderUitvaart();
   renderAbonnementen();
 }
@@ -3238,6 +3372,21 @@ function exporteerCsv(){
     regels.push(["","Nalatenschap: digitaal", (d.soort||"Toegang")+(d.oms?" — "+d.oms:""),
       d.vindplaats?"Vindplaats toegang: "+d.vindplaats:"", "", naam(d.vanWie), "", d.notitie||""].map(csvVeld).join(";"));
   });
+  nalatenschap.telefoons.forEach(t=>{
+    regels.push(["","Nalatenschap: telefoon", t.toestel||"Telefoon",
+      [t.toegang?"Openen (vindplaats): "+t.toegang:"", t.simpin?"Sim-pin (vindplaats): "+t.simpin:""].filter(Boolean).join(" | "),
+      "", naam(t.vanWie), "", t.notitie||""].map(csvVeld).join(";"));
+  });
+  nalatenschap.emails.forEach(e=>{
+    regels.push(["","Nalatenschap: e-mail", (e.adres||"E-mailaccount")+(e.provider?" — "+e.provider:""),
+      [e.vindplaats?"Vindplaats toegang: "+e.vindplaats:"", e.actie?"Bij overlijden: "+e.actie:""].filter(Boolean).join(" | "),
+      "", naam(e.vanWie), "", e.notitie||""].map(csvVeld).join(";"));
+  });
+  nalatenschap.social.forEach(s=>{
+    regels.push(["","Nalatenschap: social media", (s.platform||"Account")+(s.profiel?" — "+s.profiel:""),
+      [s.vindplaats?"Vindplaats toegang: "+s.vindplaats:"", s.actie?"Bij overlijden: "+s.actie:""].filter(Boolean).join(" | "),
+      "", naam(s.vanWie), "", s.notitie||""].map(csvVeld).join(";"));
+  });
   nalatenschap.abonnementen.forEach(a=>{
     regels.push(["","Nalatenschap: abonnement", (a.oms||"Abonnement")+(a.aanbieder?" — "+a.aanbieder:""),
       a.actie?"Bij overlijden: "+a.actie:"", a.kosten||0, naam(a.vanWie), "", a.notitie||""].map(csvVeld).join(";"));
@@ -3326,7 +3475,7 @@ function saneerBundel(obj){
     nCon.push(c);
   });
   const nb = obj.nalatenschap || {};
-  const nNal = { toegang:{bestand:"",wachtwoord:"",wieWeet:""}, documenten:[], digitaal:[], abonnementen:[],
+  const nNal = { toegang:{bestand:"",wachtwoord:"",wieWeet:""}, documenten:[], digitaal:[], telefoons:[], emails:[], social:[], abonnementen:[],
     uitvaart:{p1:{vorm:"",ondernemer:"",donor:"",wensen:""}, p2:{vorm:"",ondernemer:"",donor:"",wensen:""}} };
   if(nb.toegang) ["bestand","wachtwoord","wieWeet"].forEach(k=>{ if(nb.toegang[k]!==undefined) nNal.toegang[k]=String(nb.toegang[k]); });
   if(nb.uitvaart) ["p1","p2"].forEach(pp=>{ if(nb.uitvaart[pp]) ["vorm","ondernemer","donor","wensen"].forEach(k=>{ if(nb.uitvaart[pp][k]!==undefined) nNal.uitvaart[pp][k]=String(nb.uitvaart[pp][k]); }); });
@@ -3343,6 +3492,27 @@ function saneerBundel(obj){
     if(!["p1","p2","samen"].includes(d.vanWie)) d.vanWie="samen";
     if(src.id) d.id=String(src.id);
     nNal.digitaal.push(d);
+  });
+  if(Array.isArray(nb.telefoons)) nb.telefoons.forEach(src=>{
+    const t = leegTelefoon();
+    ["toestel","vanWie","toegang","simpin","notitie"].forEach(k=>{ if(src[k]!==undefined) t[k]=String(src[k]); });
+    if(!["p1","p2","samen"].includes(t.vanWie)) t.vanWie="samen";
+    if(src.id) t.id=String(src.id);
+    nNal.telefoons.push(t);
+  });
+  if(Array.isArray(nb.emails)) nb.emails.forEach(src=>{
+    const e = leegEmail();
+    ["adres","provider","vanWie","vindplaats","actie","notitie"].forEach(k=>{ if(src[k]!==undefined) e[k]=String(src[k]); });
+    if(!["p1","p2","samen"].includes(e.vanWie)) e.vanWie="samen";
+    if(src.id) e.id=String(src.id);
+    nNal.emails.push(e);
+  });
+  if(Array.isArray(nb.social)) nb.social.forEach(src=>{
+    const s = leegSocial();
+    ["platform","profiel","vanWie","vindplaats","actie","notitie"].forEach(k=>{ if(src[k]!==undefined) s[k]=String(src[k]); });
+    if(!["p1","p2","samen"].includes(s.vanWie)) s.vanWie="samen";
+    if(src.id) s.id=String(src.id);
+    nNal.social.push(s);
   });
   if(Array.isArray(nb.abonnementen)) nb.abonnementen.forEach(src=>{
     const a = leegAbonnement();
@@ -3399,7 +3569,7 @@ function renderAllesOveral(){
   renderWensenAlles();
 }
 
-const TOOL_VERSIE = "1.2.0 — augustus 2026";
+const TOOL_VERSIE = "1.3.0 — augustus 2026";
 
 /* =================== White-label (weergave-instellingen, apparaatgebonden) =================== */
 let instellingen = { kantoor:"", logoData:"", kleur:"" };
@@ -3961,6 +4131,27 @@ function bouwNalatenschapPrint(){
     b += `<h2>Digitale nalatenschap (vindplaatsen)</h2><table><tr><th>Soort</th><th>Account</th><th>Vindplaats toegang</th><th>Van wie</th><th>Notitie</th></tr>`;
     nl_.digitaal.forEach(dd=>{
       b += `<tr><td>${escapeHtml(dd.soort)}</td><td>${escapeHtml(dd.oms)}</td><td>${escapeHtml(dd.vindplaats)}</td><td>${escapeHtml(naam(dd.vanWie))}</td><td>${escapeHtml(dd.notitie)}</td></tr>`;
+    });
+    b += "</table>";
+  }
+  if(nl_.telefoons.length){
+    b += `<h2>Mobiele telefoons (vindplaatsen)</h2><table><tr><th>Toestel</th><th>Van wie</th><th>Hoe te openen (vindplaats code)</th><th>Sim-pincode (vindplaats)</th><th>Notitie</th></tr>`;
+    nl_.telefoons.forEach(t=>{
+      b += `<tr><td>${escapeHtml(t.toestel)}</td><td>${escapeHtml(naam(t.vanWie))}</td><td>${escapeHtml(t.toegang)}</td><td>${escapeHtml(t.simpin)}</td><td>${escapeHtml(t.notitie)}</td></tr>`;
+    });
+    b += "</table>";
+  }
+  if(nl_.emails.length){
+    b += `<h2>E-mailaccounts (vindplaatsen)</h2><table><tr><th>E-mailadres</th><th>Provider</th><th>Van wie</th><th>Vindplaats toegang</th><th>Bij overlijden</th><th>Notitie</th></tr>`;
+    nl_.emails.forEach(e=>{
+      b += `<tr><td>${escapeHtml(e.adres)}</td><td>${escapeHtml(e.provider)}</td><td>${escapeHtml(naam(e.vanWie))}</td><td>${escapeHtml(e.vindplaats)}</td><td>${escapeHtml(e.actie)}</td><td>${escapeHtml(e.notitie)}</td></tr>`;
+    });
+    b += "</table>";
+  }
+  if(nl_.social.length){
+    b += `<h2>Social media (vindplaatsen)</h2><table><tr><th>Platform</th><th>Profiel</th><th>Van wie</th><th>Vindplaats toegang</th><th>Bij overlijden</th><th>Notitie</th></tr>`;
+    nl_.social.forEach(s=>{
+      b += `<tr><td>${escapeHtml(s.platform)}</td><td>${escapeHtml(s.profiel)}</td><td>${escapeHtml(naam(s.vanWie))}</td><td>${escapeHtml(s.vindplaats)}</td><td>${escapeHtml(s.actie)}</td><td>${escapeHtml(s.notitie)}</td></tr>`;
     });
     b += "</table>";
   }
